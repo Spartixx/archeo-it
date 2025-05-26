@@ -8,18 +8,15 @@
 
 </head>
 
-<header>
-    <?php include("./components/header.php"); ?>
-</header>
-
 <body class="w-full h-screen max-h-screen bg-white">
     <?php include './components/alert.php'; ?>
 
     <?php
 
-    alert("Inscription réussie", "success");
-    alert("Vous avez oublié un champ", "warning");
-    alert("Inscription Echouée", "danger");
+    session_start();
+
+    header("Location:./pages/home.php");
+
 
     ?>
 </body>
