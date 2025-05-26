@@ -10,7 +10,7 @@
     <?php include 'components/header.php'; ?>
 </header>
 
-<body>
+<body class="w-full h-screen max-h-screen bg-white">
     <?php include 'components/alert.php'; ?>
 </body>
 </html>
