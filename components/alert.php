@@ -35,12 +35,7 @@
         </button>
 
     </div>';
-
 }
-
-alert("Inscription réussie", "success");
-alert("Vous avez oublié un champ", "warning");
-alert("Inscription Echouée", "danger");
 ?>
 
 
