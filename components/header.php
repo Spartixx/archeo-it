@@ -1,21 +1,26 @@
-<nav class="bg-gray-800 rounded-b-[2rem]">
-    <div class=" px-4 sm:px-6 lg:px-8">
-        <div class="relative flex h-16 items-center justify-between">
+<nav class="bg-gray-800 rounded-b-[2rem]" style="background-image: url('/assets/img/NavBar-background.png');"
+>
+    <div class="pl-[1rem]">
+        <div class="relative flex h-20 items-center justify-between">
 
 
             <div class="flex items-center">
-                <img class="h-8 w-auto" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Logo">
+                <img
+                        class="h-14 w-14 rounded-tl-[2rem] rounded-tr-[1rem] rounded-br-[2rem] rounded-bl-[1rem] object-cover"
+                        src="https://media.discordapp.net/attachments/1304183457022349314/1361249392048210010/raw.png?ex=683570c9&is=68341f49&hm=446a61cb65370adf0e23ad3307e3c044a2fac58f89c8ee95249ab9d32fe76c15&=&format=webp&quality=lossless&width=936&height=936"
+                        alt="Logo">
             </div>
+
 
 
             <div class="absolute inset-x-0 text-center">
                 <h1 class="text-white text-xl font-bold">Archeo-it</h1>
             </div>
 
-            <div class="flex items-center">
-                <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none">
+            <div class="flex items-center pr-[1rem]">
+                <button type="button" class="relative flex rounded-full text-sm ">
                     <span class="sr-only">Open user menu</span>
-                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Avatar">
+                    <img class="h-14 w-14 rounded-tl-[1rem] rounded-tr-[2rem] rounded-br-[1rem] rounded-bl-[2rem] " src="https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png" alt="Avatar">
                 </button>
             </div>
 
