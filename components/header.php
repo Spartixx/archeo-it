@@ -7,7 +7,7 @@
             <div class="flex items-center">
                 <img
                         class="h-16 w-16  rounded-tl-[2rem] rounded-tr-[1rem] rounded-br-[2rem] rounded-bl-[1rem] object-cover"
-                        src="https://media.discordapp.net/attachments/1304183457022349314/1361249392048210010/raw.png?ex=683570c9&is=68341f49&hm=446a61cb65370adf0e23ad3307e3c044a2fac58f89c8ee95249ab9d32fe76c15&=&format=webp&quality=lossless&width=936&height=936"
+                        src="/assets/img/logo-archeo-it.png"
                         alt="Logo">
             </div>
 

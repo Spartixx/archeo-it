@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -12,20 +12,89 @@
     <?php include("../components/header.php"); ?>
 </header>
 
-<body class="w-full h-screen max-h-screen bg-white">
 
-    <?php include '../components/alert.php'; ?>
+<body>
+
+<div class="flex flex-col p-5 gap-5">
+
+    <div>
+        <div class="mb-4 flex flex-row justify-center items-center">
+            <button class="bg-[#A0536A] text-white px-6 py-2 rounded-full font-semibold">Blog</button>
+        </div>
+
+        <!-- Première ligne d'actus -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 h-72">
+            <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden">
+                <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-50 rounded-xl">
+                <div class="relative z-10">
+                    <h2 class="text-xl font-bold">Actu 1</h2>
+                    <p class="text-sm">Bréf </p>
+                </div>
+            </div>
+            <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden">
+                <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-50 rounded-xl">
+                <div class="relative z-10">
+                    <h2 class="text-xl font-bold">Actu 1</h2>
+                    <p class="text-sm">Bréf deso</p>
+                </div>
+            </div>
+            <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden">
+                <img src="" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-50 rounded-xl">
+                <div class="relative z-10">
+                    <h2 class="text-xl font-bold">Actu 1</h2>
+                    <p class="text-sm">Br</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="mb-4 flex flex-row justify-center items-center">
+            <button class="bg-[#A0536A] text-white px-6 py-2 rounded-full font-semibold">Sites</button>
+        </div>
+
+        <!-- Première ligne d'actus -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden">
+                <img src="" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-50 rounded-xl">
+                <div class="relative z-10">
+                    <h2 class="text-xl font-bold">Actu 1</h2>
+                    <p class="text-sm">Bréf </p>
+                </div>
+            </div>
+            <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden h-72">
+                <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-50 rounded-xl">
+                <div class="relative z-10">
+                    <h2 class="text-xl font-bold">Actu 1</h2>
+                    <p class="text-sm">Bréf deso</p>
+                </div>
+            </div>
+            <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden">
+                <img src="" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-50 rounded-xl">
+                <div class="relative z-10">
+                    <h2 class="text-xl font-bold">Actu 1</h2>
+                    <p class="text-sm">Br</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>
+
+
 
     <?php
 
     session_start();
 
-    alert("Inscription réussie", "success");
-    alert("Vous avez oublié un champ", "warning");
-    alert("Inscription Echouée", "danger");
-
-
     ?>
-</body>
 
+
+
+</body>
 </html>
