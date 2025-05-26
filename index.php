@@ -8,9 +8,12 @@
 
 </head>
 
+<header>
+    <?php include("./components/header.php"); ?>
+</header>
+
 <body class="w-full h-screen max-h-screen bg-white">
-    <?php include 'components/alert.php'; ?>
+    <?php include './components/alert.php'; ?>
 </body>
 
-<script src="./assets/js/alert.js"></script>
 </html>
