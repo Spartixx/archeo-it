@@ -24,9 +24,6 @@
             <button class="bg-[#A0536A] text-white px-6 py-2 rounded-full font-semibold text-3xl">Blog</button>
         </div>
 
-        <?php alert("Alerte fonctionelle hurfuy", "success")?>
-        <?php alert("Alerte vverferferz ere hurfuy", "danger")?>
-        <?php alert("Alerte fonfrferf erferfe ctionelle hurfuy", "warning")?>
 
 
         <!-- Première ligne d'actus -->

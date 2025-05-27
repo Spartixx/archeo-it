@@ -31,7 +31,7 @@ session_start();
                  alt="Fouille programmée"
                  class="w-full h-120 object-cover rounded-xl mb-4">
             <h2 class="text-2xl font-bold text-center text-[#A0536A]">Une fouille programmée</h2>
-            <p class="text-sm text-center mt-2">Lorem ipsum dolor sit amet...</p>
+            <p class="text-sm text-center mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
 
         <!-- Bloc 2 -->
@@ -40,13 +40,13 @@ session_start();
                  alt="Fouille programmée"
                  class="w-full h-120 object-cover rounded-xl mb-4">
             <h2 class="text-2xl font-bold text-center text-[#A0536A]">Une fouille préventive</h2>
-            <p class="text-sm text-center mt-2">Lorem ipsum dolor sit amet...</p>
+            <p class="text-sm text-center mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
     </div>
 
     <div class="bg-gray-300 rounded-xl p-4 flex flex-col items-center overflow-hidden">
         <h2 class="text-2xl font-bold text-center text-[#A0536A]">En savoir plus</h2>
-        <p class="text-sm text-center mt-2">Lorem ipsum dolor sit amet...</p>
+        <p class="text-sm text-center mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </div>
 </div>
 </body>
