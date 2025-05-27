@@ -16,7 +16,7 @@ size = 15
 groupes = []
 
 if choix == "1":
-    groupes = [luppercase_letters, lowercase_letters]
+    groupes = [uppercase_letters, lowercase_letters]
 elif choix == "2":
     groupes = [uppercase_letters, lowercase_letters, digits]
 elif choix == "3":
@@ -27,7 +27,7 @@ else:
 
 password = [random.choice(groupe) for groupe in groupes]
 used_chars = ''.join(groupes)
-mot_de_passe += random.choices(used_chars, k=size - len(password))
+password += random.choices(used_chars, k=size - len(password))
 
 random.shuffle(password)
 
