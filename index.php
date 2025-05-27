@@ -5,6 +5,7 @@
     <title>Title</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="./assets/js/alert.js"></script>
+    <link rel="stylesheet" href="../assets/css/main.css">
 
 </head>
 

@@ -1,9 +1,16 @@
-:root {
-  --bg-primary-color: #181818;
-  --btn-primary-color-gradient: linear-gradient(0.25turn, #996577, #4E4362);
-  --btn-primary-color: #996577;
-  --btn-secondary-color-gradient: linear-gradient(0.25turn, #BB7EB9, #553954);
-  --btn-secondary-color: #4E4362;
+:root{
+    --bg-primary-color: #181818;
+    --btn-primary-color-gradient : linear-gradient(0.25turn, #996577, #4E4362);
+    --btn-primary-color : #996577;
+    --btn-secondary-color-gradient : linear-gradient(0.25turn, #BB7EB9, #553954);
+    --btn-secondary-color : #4E4362;
 }
 
-/*# sourceMappingURL=main.css.map */
+
+.pulse {
+    animation: pulse 1s infinite ease-in-out alternate;
+}
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+}
