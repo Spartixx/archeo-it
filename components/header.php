@@ -9,8 +9,8 @@
                 </a>
             </div>
 
-            <div class="absolute inset-x-0 text-center">
-                <h1 class="text-white text-4xl font-bold">Archeo-it</h1>
+            <div class="absolute left-1/2 transform -translate-x-1/2 w-max">
+                <h1 class="text-white text-4xl font-bold pointer-events-none">Archeo-it</h1>
             </div>
 
             <div class="flex items-center pr-[1rem]">
@@ -20,7 +20,6 @@
                     </a>
                 </button>
             </div>
-
         </div>
     </div>
 </nav>
