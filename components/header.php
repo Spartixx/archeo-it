@@ -3,19 +3,11 @@
     <div class="pl-[1rem]">
         <div class="relative flex h-20 items-center justify-between">
 
-
             <div class="flex items-center">
                 <a href="/pages/home.php" class="block">
-                    <img
-                            class="h-16 w-16 rounded-tl-[2rem] rounded-tr-[1rem] rounded-br-[2rem] rounded-bl-[1rem] object-cover"
-                            src="/assets/img/logo-archeo-it.png"
-                            alt="Logo"
-                    >
+                    <img class="h-16 w-16 rounded-tl-[2rem] rounded-tr-[1rem] rounded-br-[2rem] rounded-bl-[1rem] object-cover" src="/assets/img/logo-archeo-it.png" alt="Logo">
                 </a>
             </div>
-
-
-
 
             <div class="absolute inset-x-0 text-center">
                 <h1 class="text-white text-4xl font-bold">Archeo-it</h1>
