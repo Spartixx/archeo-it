@@ -28,30 +28,22 @@
 
         <!-- Première ligne d'actus -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 h-72">
-            <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden">
-                <a href="blogfouilles.php">
-                <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-40 rounded-xl">
-                <div class="relative z-10">
 
-                    <h2 class="text-4xl font-bold text-center text-white pulse">Les différents types d'archéologie</h2>
-                    <p class="text-sm text-center">Pour savoir différencier les fouilles programées des fouilles préventives </p>
+            <?php for($i = 0; $i < 3; $i++) { ?>
+
+                <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden">
+                    <a href="blogfouilles.php">
+                        <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-40 rounded-xl">
+                        <div class="relative z-10">
+
+                            <h2 class="text-4xl font-bold text-center text-white pulse">Les différents types d'archéologie</h2>
+                            <p class="text-sm text-center">Pour savoir différencier les fouilles programées des fouilles préventives </p>
                     </a>
                 </div>
             </div>
-            <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden">
-                <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-40 rounded-xl">
-                <div class="relative z-10">
-                    <h2 class="text-4xl font-bold text-center text-white pulse">Actu 1</h2>
-                    <p class="text-sm text-center">Bréf rugferut gfrezuguy  </p>
-                </div>
-            </div>
-            <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden">
-                <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-40 rounded-xl">
-                <div class="relative z-10">
-                    <h2 class="text-4xl font-bold text-center text-white pulse">Actu 1</h2>
-                    <p class="text-sm text-center">Bréf iry  </p>
-                </div>
-            </div>
+
+            <?php } ?>
+
         </div>
     </div>
 

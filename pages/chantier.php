@@ -28,7 +28,7 @@
 
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            <!-- Bloc 1 -->
+
             <div class="bg-gray-300 rounded-xl p-4 flex flex-col items-center overflow-hidden">
                 <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg"
                      alt="Actu 1"
@@ -37,7 +37,7 @@
                 <p class="text-sm text-center mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
 
-            <!-- Bloc 2 -->
+
             <div class="bg-gray-300 rounded-xl p-4 flex flex-col items-center overflow-hidden">
                 <img src="https://www.francebleu.fr/s3/cruiser-production/2022/07/3c0acc83-e127-4430-8b1a-84c538b99bdc/1200x680_img-20220704-wa0011.webp"
                      alt="Actu 2"
@@ -46,7 +46,7 @@
                 <p class="text-sm text-center mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
 
-            <!-- Bloc 3 -->
+
             <div class="bg-gray-300 rounded-xl p-4 flex flex-col items-center overflow-hidden">
                 <img src="https://www.francebleu.fr/s3/cruiser-production/2022/07/5a481059-d315-4222-91c2-2a4339910c7c/600_img-20220704-wa0007.webp"
                      alt="Actu 3"

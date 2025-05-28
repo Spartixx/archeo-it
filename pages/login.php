@@ -23,7 +23,7 @@
 
 ?>
 
-   <div class="w-full flex flex-row flex-wrap gap-15 justify-center items-center p-8" >
+   <div class="w-full flex flex-row flex-wrap gap-15 justify-center items-center p-8 mt-3" >
        <div class="w-auto h-fit border-2 rounded-2xl flex flex-col justify-center items-center gap-4 p-4 transition hover:sm:scale-105 transition lg:hover:scale-110 transition hover:scale-105">
 
            <img class="w-25 h-25 rounded-2xl" src="../assets/img/logo-archeo-it.png" alt="logo">
@@ -40,7 +40,7 @@
                <input class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre mot de passe">
            </div>
 
-           <button class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-white" >Envoyer</button>
+           <button class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-white transition hover:scale-105" >Envoyer</button>
 
        </div>
 
@@ -68,7 +68,10 @@
            <div class="flex flex-col items-start w-full">
                <h3 class="font-bold text-2xl rounded-2xl text-yellow-900" >Confirmation</h3>
                <input class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Confirmez votre mot de passe">
+               <p class="underline ml-1 mt-1">Générer un mot de passe</p>
            </div>
+
+           <button class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-white transition hover:scale-105" >Envoyer</button>
 
        </div>
    </div>
