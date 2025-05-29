@@ -16,7 +16,7 @@
             <div class="flex items-center pr-[1rem]">
                 <button type="button" class="relative flex rounded-full text-sm ">
                     <a href="/pages/login.php">
-                    <img class="h-16 w-16 rounded-tl-[1rem] rounded-tr-[2rem] rounded-br-[1rem] rounded-bl-[2rem] " src="https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png" alt="Avatar">
+                    <img class="h-16 w-16 rounded-tl-[1rem] rounded-tr-[2rem] rounded-br-[1rem] rounded-bl-[2rem] " src="../assets/img/icons/userIcon.png" alt="Avatar">
                     </a>
                 </button>
             </div>
