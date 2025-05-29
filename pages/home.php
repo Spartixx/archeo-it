@@ -29,20 +29,29 @@
         <!-- Première ligne d'actus -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 h-72">
 
-            <?php for($i = 0; $i < 3; $i++) { ?>
-
-                <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden">
-                    <a href="blogfouilles.php">
-                        <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-40 rounded-xl">
-                        <div class="relative z-10">
-
-                            <h2 class="text-4xl font-bold text-center text-white pulse">Les différents types d'archéologie</h2>
-                            <p class="text-sm text-center">Pour savoir différencier les fouilles programées des fouilles préventives </p>
-                    </a>
+            <a class="bg-gray-300 rounded-xl p-4 relative overflow-hidden" href="../pages/login.php">
+                <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-40 rounded-xl">
+                <div class="relative z-10 flex flex-col items-center">
+                    <h2 class="text-4xl font-bold text-center text-white w-fit p-1 px-3 pulse bg-yellow-900/50 rounded-xl">Chantier de Graufhtal</h2>
+                    <p class="text-xl text-center bg-white/40 text-black p-2 rounded-xl mt-2">erough etsughesigyh siuhg seghesgiyts gitsliyh g</p>
                 </div>
-            </div>
+            </a>
 
-            <?php } ?>
+            <a class="bg-gray-300 rounded-xl p-4 relative overflow-hidden" href="../pages/login.php">
+                <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-40 rounded-xl">
+                <div class="relative z-10 flex flex-col items-center">
+                    <h2 class="text-4xl font-bold text-center text-white w-fit p-1 px-3 pulse bg-yellow-900/50 rounded-xl">Chantier de Graufhtal</h2>
+                    <p class="text-xl text-center bg-white/40 text-black p-2 rounded-xl mt-2">erough etsughesigyh siuhg seghesgiyts gitsliyh g</p>
+                </div>
+            </a>
+
+            <a class="bg-gray-300 rounded-xl p-4 relative overflow-hidden" href="../pages/login.php">
+                <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-40 rounded-xl">
+                <div class="relative z-10 flex flex-col items-center">
+                    <h2 class="text-4xl font-bold text-center text-white w-fit p-1 px-3 pulse bg-yellow-900/50 rounded-xl">Chantier de Graufhtal</h2>
+                    <p class="text-xl text-center bg-white/40 text-black p-2 rounded-xl mt-2">erough etsughesigyh siuhg seghesgiyts gitsliyh g</p>
+                </div>
+            </a>
 
         </div>
     </div>
@@ -55,29 +64,27 @@
 
         <!-- Deuxième ligne d'actus -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 h-72">
-            <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden">
-                <a href="chantier.php">
+            <a class="bg-gray-300 rounded-xl p-4 relative overflow-hidden" href="../pages/login.php">
                 <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-40 rounded-xl">
-                <div class="relative z-10">
-                    <h2 class="text-4xl font-bold text-center text-white pulse">Chantier de Graufhtal</h2>
-                    <p class="text-sm text-center"> </p>
-                </a>
+                <div class="relative z-10 flex flex-col items-center">
+                    <h2 class="text-4xl font-bold text-center text-white w-fit p-1 px-3 pulse bg-yellow-900/50 rounded-xl">Chantier de Graufhtal</h2>
+                    <p class="text-xl text-center bg-white/40 text-black p-2 rounded-xl mt-2">erough etsughesigyh siuhg seghesgiyts gitsliyh g</p>
                 </div>
-            </div>
-            <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden">
+            </a>
+            <a class="bg-gray-300 rounded-xl p-4 relative overflow-hidden" href="../pages/login.php">
                 <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-40 rounded-xl">
-                <div class="relative z-10">
-                    <h2 class="text-4xl font-bold text-center text-white pulse">Actu 1</h2>
-                    <p class="text-sm text-center">Bréf iruhfi rfiyrugferut gfrezuguy  </p>
+                <div class="relative z-10 flex flex-col items-center">
+                    <h2 class="text-4xl font-bold text-center text-white w-fit p-1 px-3 pulse bg-yellow-900/50 rounded-xl">Chantier de Graufhtal</h2>
+                    <p class="text-xl text-center bg-white/40 text-black p-2 rounded-xl mt-2">erough etsughesigyh siuhg seghesgiyts gitsliyh g</p>
                 </div>
-            </div>
-            <div class="bg-gray-300 rounded-xl p-4 relative overflow-hidden">
+            </a>
+            <a class="bg-gray-300 rounded-xl p-4 relative overflow-hidden" href="../pages/login.php">
                 <img src="https://www.lagazettefrance.fr/thumbs/1368×1026/articles/2023/06/AdobeStock-91200299.jpeg" alt="Actu 1" class="absolute top-0 left-0 w-full h-full object-cover opacity-40 rounded-xl">
-                <div class="relative z-10">
-                    <h2 class="text-4xl font-bold text-center text-white pulse">Actu 1</h2>
-                    <p class="text-sm text-center">Bréf iruhfi rfiyrugferut gfrezuguy  </p>
+                <div class="relative z-10 flex flex-col items-center">
+                    <h2 class="text-4xl font-bold text-center text-white w-fit p-1 px-3 pulse bg-yellow-900/50 rounded-xl">Chantier de Graufhtal</h2>
+                    <p class="text-xl text-center bg-white/40 text-black p-2 rounded-xl mt-2">erough etsughesigyh siuhg seghesgiyts gitsliyh g</p>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 
