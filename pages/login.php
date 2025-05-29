@@ -62,12 +62,19 @@
 
            <div class="flex flex-col items-start w-full">
                <h3 class="font-bold text-2xl rounded-2xl text-yellow-900" >Mot de passe</h3>
-               <input class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre mot de passe">
+               <div class="flex flex-row items-center justify-end w-full">
+                   <input class="border-2 rounded-2xl p-3 w-full" id="passwordInput" type="password" placeholder="Votre mot de passe">
+                   <img id="passwordView" class="w-10 h-10 absolute mr-1" src="../assets/img/icons/hidePassword.webp" alt="passwordHided">
+               </div>
            </div>
 
            <div class="flex flex-col items-start w-full">
                <h3 class="font-bold text-2xl rounded-2xl text-yellow-900" >Confirmation</h3>
-               <input class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Confirmez votre mot de passe">
+               <div class="flex flex-row items-center justify-end w-full">
+                   <input id="passwordConfirmInput" class="border-2 rounded-2xl p-3 w-full" type="password" placeholder="Confirmez votre mot de passe">
+                   <img id="passwordConfirmView" class="w-10 h-10 absolute mr-1" src="../assets/img/icons/hidePassword.webp" alt="passwordHided">
+               </div>
+
                <button class="underline ml-1 mt-1 transition hover:scale-105" id="generatePasswordBtn">Générer un mot de passe</button>
 
 
@@ -91,12 +98,16 @@
                         <h3 class=" text-2xl font-semibold text-white font-bold" id="modal-title">Choisissez vos paramètres</h3>
                         <div class="mt-2 flex flex-col items-start">
                             <p class="text-l text-white font-semibold" >Taille de mot de passe</p>
-                            <input class="border-1 rounded-sm border-white pr-1" type="number">
+                            <input class="border-1 rounded-sm border-white pr-1 text-white" id="passwordSizeInput" value="12" type="number">
                         </div>
 
                         <div class="mt-2 flex flex-col items-start">
                             <p class="text-l text-white font-semibold" >Taille de mot de passe</p>
-                            <input class="border-1 rounded-sm border-white pr-1" type="number">
+                            <select class="text-white border-1 border-white rounded-sm p-1" name="passwordModeSelection" id="passwordModeSelection">
+                                <option value="1">Alphabétique seulement</option>
+                                <option value="2">Alphabétique et numérique</option>
+                                <option value="3" selected>Alphabétique, numérique et caractères spéciaux.</option>
+                            </select>
                         </div>
 
                     </div>
@@ -115,6 +126,7 @@
 </div>
 
 </body>
-<script src="../assets/js/test.js"></script>
-<script src="../assets/js/modals.js"></script>
+<script type="module" src="../assets/js/test.js"></script>
+<script type="module" src="../assets/js/modals.js"></script>
+<script type="module" src="../assets/js/passwordView.js"></script>
 </html>
