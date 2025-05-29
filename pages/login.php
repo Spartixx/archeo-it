@@ -15,6 +15,9 @@
 
 <body class="w-full h-screen max-h-screen bg-white">
 
+
+<img class="z-1 w-full h-screen opacity-100 absolute top-0" src="../assets/img/archeoBodyBackground.jpg" alt="">
+
 <?php include '../components/alert.php'; ?>
 
 <?php
@@ -23,8 +26,8 @@
 
 ?>
 
-   <div class="w-full flex flex-row flex-wrap gap-15 justify-center items-center p-8 mt-3" >
-       <div class="w-auto h-fit border-2 rounded-2xl flex flex-col justify-center items-center gap-4 p-4 ">
+   <div class="w-full flex flex-row flex-wrap gap-15 justify-center items-center p-8 mt-3 relative z-5" >
+       <div class="w-auto h-fit border-2 rounded-2xl flex flex-col justify-center items-center gap-4 p-4 bg-white/50">
 
            <img class="w-25 h-25 rounded-2xl" src="../assets/img/logo-archeo-it.png" alt="logo">
 
@@ -44,7 +47,7 @@
 
        </div>
 
-       <div class="w-auto h-fit border-2 rounded-2xl flex flex-col justify-center items-center gap-4 p-4">
+       <div class="w-auto h-fit border-2 rounded-2xl flex flex-col justify-center items-center gap-4 p-4 bg-white/50">
 
            <img class="w-25 h-25 rounded-2xl" src="../assets/img/logo-archeo-it.png" alt="logo">
 
