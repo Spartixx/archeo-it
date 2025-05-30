@@ -31,16 +31,16 @@
            <h2 class="text-yellow-950 font-bold text-xl md:text-3xl m-2">Connectez vous à votre compte</h2>
 
            <div class="flex flex-col items-start w-full">
-               <h3 class="font-bold text-2xl rounded-2xl text-yellow-900" >Email</h3>
+               <h3 class="font-bold text-2xl rounded-2xl text-yellow-950" >Email</h3>
                <input class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre addresse E-mail" id="modeInput">
            </div>
 
            <div class="flex flex-col items-start w-full">
-               <h3 class="font-bold text-2xl rounded-2xl text-yellow-900" >Mot de passe</h3>
+               <h3 class="font-bold text-2xl rounded-2xl text-yellow-950" >Mot de passe</h3>
                <input class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre mot de passe" id="sizeInput">
            </div>
 
-           <button class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-black transition hover:scale-105" id="loginBtn" >Envoyer</button>
+           <button class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-white transition hover:scale-105" id="loginBtn" >Envoyer</button>
 
        </div>
 
@@ -51,17 +51,17 @@
            <h2 class="text-yellow-950 font-bold text-2xl md:text-3xl m-2">Créez un nouveau compte</h2>
 
            <div class="flex flex-col items-start w-full">
-               <h3 class="font-bold text-2xl rounded-2xl text-yellow-900" >Nom d'utilisateur</h3>
+               <h3 class="font-bold text-2xl rounded-2xl text-yellow-950" >Nom d'utilisateur</h3>
                <input class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre nom d'utilisateur">
            </div>
 
            <div class="flex flex-col items-start w-full">
-               <h3 class="font-bold text-2xl rounded-2xl text-yellow-900" >Email</h3>
+               <h3 class="font-bold text-2xl rounded-2xl text-yellow-950" >Email</h3>
                <input class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre addresse E-mail">
            </div>
 
            <div class="flex flex-col items-start w-full">
-               <h3 class="font-bold text-2xl rounded-2xl text-yellow-900" >Mot de passe</h3>
+               <h3 class="font-bold text-2xl rounded-2xl text-yellow-950" >Mot de passe</h3>
                <div class="flex flex-row items-center justify-end w-full">
                    <input class="border-2 rounded-2xl p-3 w-full" id="passwordInput" type="password" placeholder="Votre mot de passe">
                    <img id="passwordView" class="w-10 h-10 absolute mr-1" src="../assets/img/icons/hidePassword.webp" alt="passwordHided">
@@ -69,7 +69,7 @@
            </div>
 
            <div class="flex flex-col items-start w-full">
-               <h3 class="font-bold text-2xl rounded-2xl text-yellow-900" >Confirmation</h3>
+               <h3 class="font-bold text-2xl rounded-2xl text-yellow-950" >Confirmation</h3>
                <div class="flex flex-row items-center justify-end w-full">
                    <input id="passwordConfirmInput" class="border-2 rounded-2xl p-3 w-full" type="password" placeholder="Confirmez votre mot de passe">
                    <img id="passwordConfirmView" class="w-10 h-10 absolute mr-1" src="../assets/img/icons/hidePassword.webp" alt="passwordHided">
@@ -80,7 +80,7 @@
 
            </div>
 
-           <button class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-black transition hover:scale-105" >Envoyer</button>
+           <button class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-white transition hover:scale-105" >Envoyer</button>
 
        </div>
    </div>
@@ -114,7 +114,7 @@
                 </div>
 
                 <div class="mt-4 border-t-1 border-black pt-3 px-4 pb-3 md:pb-0 sm:flex sm:flex-row-reverse sm:px-6 z-2">
-                    <button type="button" id="passwordGenerationBtn" class="opacity-80 transition hover:scale-110 inline-flex w-full justify-center rounded-md bg-yellow-700 px-3 py-2 text-sm font-semibold text-black shadow-xs hover:bg-yellow-700 sm:ml-3 sm:w-auto">Générer</button>
+                    <button type="button" id="passwordGenerationBtn" class="opacity-80 transition hover:scale-110 inline-flex w-full justify-center rounded-md bg-yellow-950 text-white px-3 py-2 text-sm font-semibold text-black shadow-xs sm:ml-3 sm:w-auto">Générer</button>
                     <button type="button" id="passwordGenerationCancel" class="opacity-80 transition hover:scale-110 mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto">Fermer</button>
                 </div>
             </div>
