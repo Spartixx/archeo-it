@@ -40,7 +40,7 @@
                <input class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre mot de passe" id="sizeInput">
            </div>
 
-           <button class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-white transition hover:scale-105" id="loginBtn" >Envoyer</button>
+           <button class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-black transition hover:scale-105" id="loginBtn" >Envoyer</button>
 
        </div>
 
@@ -80,7 +80,7 @@
 
            </div>
 
-           <button class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-white transition hover:scale-105" >Envoyer</button>
+           <button class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-black transition hover:scale-105" >Envoyer</button>
 
        </div>
    </div>
@@ -89,21 +89,20 @@
 <div class="fixed inset-0 bg-gray-500/75 transition-opacity passwordGenerationDiv" aria-hidden="true" hidden></div>
 
 <div class=" fixed inset-0 z-10 w-screen passwordGenerationDiv" hidden>
-    <div class="flex flex-row min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
-        <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-            <img class="absolute top-0 left-0 w-full h-full object-cover z-1 opacity-75" src="../assets/img/backgroundArcheo.png" alt="">
-            <div class="px-4 pt-5 sm:p-6 sm:pb-4 relative z-10">
+    <div class="flex flex-row min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0 ">
+        <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg bg-white">
+            <div class="px-4 pt-5 sm:p-6 sm:pb-4 relative z-10 bg-yellow-950/10">
                 <div class="sm:flex sm:items-start">
                     <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                        <h3 class=" text-2xl font-semibold text-white font-bold" id="modal-title">Choisissez vos paramètres</h3>
+                        <h3 class=" text-2xl font-semibold text-black font-bold" id="modal-title">Choisissez vos paramètres</h3>
                         <div class="mt-2 flex flex-col items-start">
-                            <p class="text-l text-white font-semibold" >Taille de mot de passe</p>
-                            <input class="border-1 rounded-sm border-white pr-1 text-white" id="passwordSizeInput" value="12" type="number">
+                            <p class="text-l text-black font-semibold" >Taille de mot de passe</p>
+                            <input class="border-1 rounded-sm border-black pr-1 text-black" id="passwordSizeInput" value="12" type="number">
                         </div>
 
                         <div class="mt-2 flex flex-col items-start">
-                            <p class="text-l text-white font-semibold" >Taille de mot de passe</p>
-                            <select class="text-white border-1 border-white rounded-sm p-1" name="passwordModeSelection" id="passwordModeSelection">
+                            <p class="text-l text-black font-semibold" >Taille de mot de passe</p>
+                            <select class="text-black border-1 border-black rounded-sm p-1" name="passwordModeSelection" id="passwordModeSelection">
                                 <option value="1">Alphabétique seulement</option>
                                 <option value="2">Alphabétique et numérique</option>
                                 <option value="3" selected>Alphabétique, numérique et caractères spéciaux.</option>
@@ -114,8 +113,8 @@
 
                 </div>
 
-                <div class="mt-4 border-t-1 border-white pt-3 px-4 pb-3 md:pb-0 sm:flex sm:flex-row-reverse sm:px-6 z-2">
-                    <button type="button" id="passwordGenerationBtn" class="opacity-80 transition hover:scale-110 inline-flex w-full justify-center rounded-md bg-yellow-700 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-yellow-700 sm:ml-3 sm:w-auto">Générer</button>
+                <div class="mt-4 border-t-1 border-black pt-3 px-4 pb-3 md:pb-0 sm:flex sm:flex-row-reverse sm:px-6 z-2">
+                    <button type="button" id="passwordGenerationBtn" class="opacity-80 transition hover:scale-110 inline-flex w-full justify-center rounded-md bg-yellow-700 px-3 py-2 text-sm font-semibold text-black shadow-xs hover:bg-yellow-700 sm:ml-3 sm:w-auto">Générer</button>
                     <button type="button" id="passwordGenerationCancel" class="opacity-80 transition hover:scale-110 mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto">Fermer</button>
                 </div>
             </div>
