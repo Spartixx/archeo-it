@@ -1,9 +1,15 @@
-const passwordInput = document.querySelector("#passwordInput")
+const passwordRegisterInput = document.querySelector("#passwordRegisterInput")
 const passwordConfirmInput = document.querySelector("#passwordConfirmInput")
 const passwordView = document.querySelector("#passwordView")
 const passwordConfirmView = document.querySelector("#passwordConfirmView")
 
-passwordView.addEventListener("click", ()=>{
-    passwordInput.type === "text" ? passwordInput.type = "password": passwordInput.type = "text"
-    passwordView.src === "hidePassword.webp" ? passwordView.src = "../assets/img/icons/viewPassword.png": passwordView.src = "../assets/img/icons/hidePassword.webp"
-})
+
+function setPasswordMode(viewImage, input){
+    viewImage?.addEventListener("click", ()=>{
+        input.type === "text" ? input.type = "password": input.type = "text"
+        viewImage.src.endsWith("hidePassword.webp") ? viewImage.src = "../assets/img/icons/viewPassword.png": viewImage.src = "../assets/img/icons/hidePassword.webp"
+    })
+}
+
+setPasswordMode(passwordView, passwordRegisterInput)
+setPasswordMode(passwordConfirmView, passwordConfirmInput)
