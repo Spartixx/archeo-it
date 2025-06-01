@@ -26,6 +26,7 @@ function checkLogin($email, $password){
     }
 
     alert("Connexion effectuée avec succes !", "success");
+    $_SESSION['user'] = getUserDatas(htmlspecialchars($email))[0];
     return 1;
 }
 
@@ -61,7 +62,7 @@ function registerUser($username, $email, $password, $passwordConfirm){
         return 0;
     }
 
-    insertUser($email, password_hash($password, PASSWORD_DEFAULT), $username);
+    insertUser(htmlspecialchars($email), password_hash($password, PASSWORD_DEFAULT), htmlspecialchars($username));
     return 1;
 
 }
@@ -75,7 +76,7 @@ function checkLoginInputs($loginPost){
         alert("Veuillez entrer un mot de passe !", "danger");
 
     }else{
-        checkLogin($loginPost["loginMailInput"], $loginPost["loginPasswordInput"]);
+        checkLogin(htmlspecialchars($loginPost["loginMailInput"]), htmlspecialchars($loginPost["loginPasswordInput"]));
     }
 }
 
@@ -95,6 +96,6 @@ function checkRegisterInputs($registerPost)
         alert("Veuillez entrer un nom d'utilisateur !", "danger");
 
     } else {
-        registerUser($registerPost["RegisterUsernameInput"], $registerPost["registerMailInput"], $registerPost["passwordRegisterInput"], $registerPost["passwordConfirmInput"]);
+        registerUser(htmlspecialchars($registerPost["RegisterUsernameInput"]), htmlspecialchars($registerPost["registerMailInput"]), htmlspecialchars($registerPost["passwordRegisterInput"]), htmlspecialchars($registerPost["passwordConfirmInput"]));
     }
 }

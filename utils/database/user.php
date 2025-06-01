@@ -31,6 +31,31 @@ function insertUser($mail, $password, $username){
 
 
 
+function getUserDatas($mail){
+
+    try {
+        /**
+         * Allows to get user data by its email.
+         *
+         * @param string $mail    Corresponds to the user mail.
+         * @return array-key      Corresponds to the user datas. keys : username, email, password, account_creation, admin
+         *
+         * @throws Exception      For any error.
+         */
+        global $pdo;
+        $req = "SELECT * FROM users WHERE email = :mail;";
+        $result = $pdo->prepare($req);
+        $result->execute(['mail' => $mail]);
+        return $result->fetchAll();
+
+    }catch(Exception $e){
+        alert("Une erreur interne est survenue lors de l'inscription... Veuillez réessayer", "danger");
+        return [];
+    }
+}
+
+
+
 
 function getUserPassword($mail){
 
@@ -54,8 +79,11 @@ function getUserPassword($mail){
 
     }catch(Exception $e){
         alert("Une erreur interne est survenue lors de l'inscription... Veuillez réessayer", "danger");
+        return "";
     }
 }
+
+
 
 
 function nameExists($username){
@@ -80,6 +108,7 @@ function nameExists($username){
 
     }catch(Exception $e){
         alert("Une erreur interne est survenue lors de l'inscription... Veuillez réessayer", "danger");
+        return true;
     }
 }
 

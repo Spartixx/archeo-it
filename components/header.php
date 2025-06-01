@@ -24,7 +24,7 @@
                     <line x1="15" x2="3" y1="12" y2="12"></line>
                 </svg>
 
-                <h2 class="md:text-xl sm:text-lg text-lg">Connexion</h2>
+                <h2 class="md:text-xl sm:text-lg text-lg"><?= isset($_SESSION["user"]) && $_SESSION["user"] != [] ? "Profil" : "Connexion" ?></h2>
             </a>
         </div>
     </div>

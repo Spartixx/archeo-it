@@ -7,7 +7,9 @@ include '../utils/backend/loginFunctions.php';
 
 session_start();
 
-
+if(isset($_SESSION["user"]) && $_SESSION["user"] != []){
+    header("location: ./home.php");
+}
 
 if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
     if(isset($_POST["sendLoginBtn"])){

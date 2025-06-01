@@ -1,3 +1,13 @@
+<?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -125,19 +135,6 @@
         </div>
 
     </div>
-
-
-</body>
-</html>
-
-
-
-<?php
-
-session_start();
-
-?>
-
 
 
 </body>
