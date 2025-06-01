@@ -13,6 +13,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $mode = "infos";
     }else if(isset($_POST["AdminSelection"])){
         $mode = "admin";
+    }else if(isset($_POST["logoutBtn"])){
+        session_destroy();
+        header("location: ./home.php");
     }
 }
 
@@ -86,7 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             <div class="flex flex-row flex-wrap justify-center w-full gap-5 p-3">
 
-                <div class="flex flex-col gap-6 justify-start p-3 rounded-xl bg-yellow-950/60 sm:w-full md:w-full lg:w-[48%] w-full h-fit">
+                <div class="flex flex-col gap-6 justify-start p-3 rounded-xl shadow-xl bg-yellow-950/60 sm:w-full md:w-full lg:w-[48%] w-full h-fit">
                     <div class="flex flex-col gap-3">
                         <h3 class="text-white text-2xl p-1 bg-yellow-950/30 rounded-lg">Nom d'utilisateur</h3>
                         <p class="text-white text-lg pl-1 border-b-1 pb-4 border-b-yellow-950"><?= $_SESSION["user"]["username"] ?></p>
@@ -98,7 +101,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-6 justify-start p-3 rounded-xl bg-yellow-950/60 sm:w-full md:w-full lg:w-[48%] w-full h-fit">
+                <div class="flex flex-col gap-6 justify-start p-3 rounded-xl shadow-xl bg-yellow-950/60 sm:w-full md:w-full lg:w-[48%] w-full h-fit">
                     <div class="flex flex-col gap-3">
                         <h3 class="text-white text-2xl p-1 bg-yellow-950/30 rounded-lg">Date de création</h3>
                         <p class="text-white text-lg pl-1 border-b-1 pb-4 border-b-yellow-950"><?= $_SESSION["user"]["account_creation"] ?></p>

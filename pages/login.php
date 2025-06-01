@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include '../components/alert.php';
-include '../utils/backend/loginFunctions.php';
+include '../utils/backend/login.php';
 
 session_start();
 
@@ -94,7 +94,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
                    <img id="passwordConfirmView" class="w-10 h-10 absolute mr-1" src="../assets/img/icons/hidePassword.webp" alt="passwordHided">
                </div>
 
-               <button name="generatePasswordBtn" class="underline ml-1 mt-1 transition hover:scale-105" id="generatePasswordBtn">Générer un mot de passe</button>
+               <button type="button" name="generatePasswordBtn" class="underline ml-1 mt-1 transition hover:scale-105" id="generatePasswordBtn">Générer un mot de passe</button>
 
 
            </div>
