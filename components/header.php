@@ -1,27 +1,34 @@
-<nav class="bg-gray-800 rounded-b-[2rem]" style="background-image: url('/assets/img/NavBar-background.png');"
->
-    <div class="pl-[1rem]">
-        <div class="relative flex h-20 items-center justify-between">
+<nav class="border-b-2 bg-yellow-950/40 border-gray-200">
 
-            <div class="flex items-center">
-                <a href="/pages/home.php" class="block">
-                    <img class="h-16 w-16 rounded-tl-[2rem] rounded-tr-[1rem] rounded-br-[2rem] rounded-bl-[1rem] object-cover" src="/assets/img/logo-archeo-it.png" alt="Logo">
-                </a>
-            </div>
+
+    <div class="px-4">
+        <div class="relative flex flex-row h-20 items-center justify-between">
+
+            <a id="homeBtn" class="flex flex-row gap-3 items-center p-2 pr-3 rounded-xl bg-white hover:bg-yellow-950 text-black hover:text-white" href="../pages/home.php">
+                    <svg id="homeIconSvg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-foreground/80">
+                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+
+                    <h2 class="md:text-xl sm:text-lg text-lg">Accueil</h2>
+            </a>
 
             <div class="absolute left-1/2 transform -translate-x-1/2 w-max">
-                <h1 class="text-white text-4xl font-bold pointer-events-none">Archeo-it</h1>
+                <h1 class="text-black md:text-3xl lg:text-4xl sm:text-2xl text-2xl font-bold pr-[1rem] pointer-events-none cinzel ">Archeo-it</h1>
             </div>
 
-            <div class="flex items-center pr-[1rem]">
-                <button type="button" class="relative flex rounded-full text-sm ">
-                    <a href="/pages/login.php">
-                    <img class="h-16 w-16 rounded-tl-[1rem] rounded-tr-[2rem] rounded-br-[1rem] rounded-bl-[2rem] " src="../assets/img/icons/userIcon.png" alt="Avatar">
-                    </a>
-                </button>
-            </div>
+            <a class="flex items-center pr-[1rem] p-2 bg-white rounded-xl hover:bg-yellow-950 text-black hover:text-white" href="../pages/login.php">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-4 w-4">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                    <polyline points="10 17 15 12 10 7"></polyline>
+                    <line x1="15" x2="3" y1="12" y2="12"></line>
+                </svg>
+
+                <h2 class="md:text-xl sm:text-lg text-lg">Connexion</h2>
+            </a>
         </div>
     </div>
+
 </nav>
 
 
