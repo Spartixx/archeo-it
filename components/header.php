@@ -17,7 +17,7 @@
                 <h1 class="text-black md:text-3xl lg:text-4xl sm:text-2xl text-2xl font-bold pr-[1rem] pointer-events-none cinzel ">Archeo-it</h1>
             </div>
 
-            <a class="flex items-center pr-[1rem] p-2 bg-white rounded-xl hover:bg-yellow-950 text-black hover:text-white" href="../pages/login.php">
+            <a class="flex items-center pr-[1rem] p-2 bg-white rounded-xl hover:bg-yellow-950 text-black hover:text-white" href="../pages/<?= isset($_SESSION["user"]["id"]) ? "dashboard.php" : "login.php" ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-4 w-4">
                     <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
                     <polyline points="10 17 15 12 10 7"></polyline>
