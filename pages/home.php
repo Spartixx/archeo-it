@@ -136,6 +136,58 @@ session_start();
 
     </div>
 
+    <!-- Bouton pour ouvrir le chat -->
+    <button id="chat-toggle" class="fixed bottom-5 right-5 bg-yellow-950 text-white px-4 py-2 rounded-full shadow-lg hover:bg-yellow-900">
+        Besoin d'aide ?
+    </button>
+
+    <!-- Fenêtre de chat cachée au départ -->
+    <div id="chat-box" class="fixed bottom-20 right-5 bg-white w-80 h-96 border shadow-lg rounded-lg flex flex-col hidden">
+        <div class="bg-yellow-950 text-white px-4 py-2 rounded-t-lg">Assistant Archéo</div>
+        <div id="chat-messages" class="flex-1 p-2 overflow-y-auto text-sm"></div>
+        <div class="p-2 border-t">
+            <input type="text" id="chat-input" class="w-full border rounded p-1" placeholder="Posez une question..." />
+        </div>
+    </div>
+
+    <script>
+        const toggleBtn = document.getElementById('chat-toggle');
+        const chatBox = document.getElementById('chat-box');
+        const input = document.getElementById('chat-input');
+        const messages = document.getElementById('chat-messages');
+
+        toggleBtn.addEventListener('click', () => {
+            chatBox.classList.toggle('hidden');
+        });
+
+        input.addEventListener('keypress', async (e) => {
+            if (e.key === 'Enter' && input.value.trim() !== '') {
+                const userMsg = input.value;
+                addMessage('Vous', userMsg);
+                input.value = '';
+
+                try {
+                    const res = await fetch('http://localhost:3001/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: userMsg })
+                    });
+
+                    const data = await res.json();
+                    addMessage('Archéo-it', data.reply);
+                } catch (err) {
+                    addMessage('Erreur', "Impossible de contacter l'assistant.");
+                }
+            }
+        });
+
+        function addMessage(author, text) {
+            const msg = document.createElement('div');
+            msg.innerHTML = `<strong>${author} :</strong> ${text}`;
+            messages.appendChild(msg);
+            messages.scrollTop = messages.scrollHeight;
+        }
+    </script>
 
 </body>
 </html>
