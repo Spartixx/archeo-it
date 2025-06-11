@@ -18,7 +18,7 @@ function insertBlog($creator_id) {
          */
         global $pdo;
 
-        $req = "INSERT INTO blogs(creator_id) VALUES (:creator_id)";
+        $req = "INSERT INTO blogs(creator_id, creation_date) VALUES (:creator_id, CURRENT_DATE)";
         $stmt = $pdo->prepare($req);
         $stmt->execute(["creator_id" => $creator_id]);
         return $pdo->lastInsertId();

@@ -95,9 +95,9 @@ $totalElements = count($blogDatas);
         }
     ?>
 
-    <?php if($blog_id == 0 && isset($_SESSION["user"]["admin"]) && $_SESSION["user"]["admin"] == 1 && !$bypassPendings) {
+    <?php if($blog_id == 0 && isset($_SESSION["user"]["admin"]) && $_SESSION["user"]["admin"] == 1) {
         $pendingBlog = getPendingBlog($_SESSION["user"]["id"]);
-        if($pendingBlog != false) {?>
+        if($pendingBlog != false && !$bypassPendings) {?>
             <form method="post" class="flex flex-col gap-5 w-full items-center">
                 <h2 class="cinzel text-4xl">Vous avez déjà un ou plusieurs blog en cours de création :</h2>
 
