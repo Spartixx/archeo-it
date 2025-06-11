@@ -42,7 +42,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
 
 <body class="w-full h-screen max-h-screen bg-white">
 
-   <div class="w-full flex flex-row flex-wrap gap-15 justify-center items-center p-8 mt-3" >
+
+   <div class="w-full flex flex-row flex-wrap gap-15 justify-center items-start p-8 mt-3">
        <form class="w-auto h-fit border-2 rounded-2xl flex flex-col justify-center items-center gap-4 p-4" method="post">
 
            <img class="w-25 h-25 rounded-2xl" src="../assets/img/logo-archeo-it.png" alt="logo">

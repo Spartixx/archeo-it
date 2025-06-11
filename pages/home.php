@@ -34,22 +34,25 @@ session_start();
     <div class="flex flex-col gap-[7rem] justify-between p-5">
 
         <div class="flex flex-col gap-5 justify-center items-center mt-15 w-full">
-            <h2 class="md:text-4xl lg:text-6xl sm:text-3xl text-2xl cinzel font-bold ">Explorez les Échos du Passé</h2>
-            <p class="md:text-lg lg:text-xl sm:text-sm text-md text-gray-500 font-semibold text-center">Plongez dans le monde fascinant de l'archéologie, découvrez des civilisations perdues et révélez les secrets enfouis de l'histoire.</p>
-            <button class="bg-yellow-950 flex flex-row items-center gap-2 p-2 px-7 text-white rounded-lg text-lg mt-6 transition hover:scale-105 hover:bg-yellow-950/90 duration:200">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-5 w-5">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.3-4.3"></path>
-                </svg>
-                Commencer l'Exploration
-            </button>
+            <div class="flex flex-col justify-center items-center">
+                <h2 class="md:text-4xl lg:text-6xl sm:text-3xl text-2xl cinzel font-bold ">Explorez les Échos du Passé</h2>
+                <p class="md:text-lg lg:text-xl sm:text-sm text-md text-gray-500 font-semibold text-center">Plongez dans le monde fascinant de l'archéologie, découvrez des civilisations perdues et révélez les secrets enfouis de l'histoire.</p>
+                <button class="bg-yellow-950 flex flex-row items-center gap-2 p-2 px-7 text-white rounded-lg text-lg mt-6 transition hover:scale-105 hover:bg-yellow-950/90 duration:200">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-5 w-5">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                    Commencer l'Exploration
+                </button>
+            </div>
+
         </div>
 
         <div class="px-6">
-            <div class="w-full h-fit flex flex-col justify-start items-center gap-10 h-100 rounded-xl border-1">
-                <div class="w-full flex flex-col gap-5 justify-start items-center ">
+            <div class="w-full h-fit flex flex-col justify-start items-center gap-10 h-100 rounded-xl border" >
+                <div class="w-full flex flex-col gap-5 justify-start items-center" >
 
-                    <div class="w-full h-20 rounded-xl flex flex-row justify-between">
+                    <div class="w-full h-20 rounded-xl flex flex-row justify-between" >
 
                         <button class="flex flex-row items-center justify-center rounded-b-3xl rounded-tr-[0] border-1 border-t-0 border-l-0 sm:text-sm md:text-lg p-2 w-full bg-yellow-950/40 rounded-lg text-black transition hover:bg-yellow-950 hover:text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-5 w-5">
