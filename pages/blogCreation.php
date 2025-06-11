@@ -5,6 +5,8 @@ ini_set('display_errors', 1);
 
 session_start();
 
+$blog_id = isset($_GET['blog_id']) ? $_GET['blog_id'] : 0;
+
 
 ?>
 
@@ -27,6 +29,9 @@ session_start();
     <?php include("../components/header.php"); ?>
     <?php include("../components/alert.php"); ?>
     <?php include("../components/ArticleBlocks.php"); ?>
+    <?php include("../utils/database/connection.php"); ?>
+    <?php include("../utils/database/blog.php"); ?>
+
 </header>
 
 
@@ -35,6 +40,38 @@ session_start();
 
 <div class="flex flex-col gap-[7rem] justify-between p-5">
 
+    <?php if($blog_id == 0 && isset($_SESSION["user"]["admin"]) && $_SESSION["user"]["admin"] == 1) {
+        $pendingBlog = getPendingBlog($_SESSION["user"]["id"]);
+        if($pendingBlog != false) {?>
+            <div class="flex flex-col gap-3 w-full items-center">
+                <h2 class="cinzel text-4xl">Vous avez déjà un ou plusieurs blog en cours de création :</h2>
+
+                <div class="w-fit h-fit bg-white flex flex-row gap-3">
+
+
+                    <?php foreach($pendingBlog as $blog) { ?>
+
+                        <div class="w-fit h-fit flex flex-col gap-3 p-2 bg-yellow-950/30 justify-between rounded-xl">
+                            <h3 class="text-3xl font-regular text-black text-center min-w-[15rem]"><?= isset($blog["title"]) ? $blog["title"] : "titre non définit" ?></h3>
+
+                            <div class="flex flex-col gap-3">
+                                <p class="bg-green-700 rounded-3xl text-2xl p-2 px-4 text-white text-center">Modifier</p>
+                                <p class="bg-red-700 rounded-3xl text-2xl p-2 px-4 text-white text-center">Supprimer</p>
+                            </div>
+
+                            <p><?= isset($blog["creation_date"]) ? $blog["creation_date"] : "Date indisponible" ?></p>
+                        </div>
+
+                    <?php }?>
+                </div>
+            </div>
+
+        <?php }else{
+            insertBlog($_SESSION["user"]["id"]);
+        }
+
+
+    }else{?>
     <form method="post" class="flex flex-col gap-10 mt-5">
 
         <div class="flex flex-col gap-3 items-center bg-yellow-950/10 p-2 rounded-xl">
@@ -78,6 +115,9 @@ session_start();
         </div>
 
     </form>
+    <?php }?>
+
+
 
 </div>
 
