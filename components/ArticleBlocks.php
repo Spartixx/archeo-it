@@ -1,25 +1,19 @@
 <?php
-function addParagraph()
+function addParagraph($position)
 {
     echo '
-    <div id="tempParagraph" class="flex flex-col gap-3 items-center bg-yellow-950/10 p-2 rounded-xl">
+    <form method="post" id="tempParagraph" >
 
-        <textarea class="w-full h-fit border-1 rounded-xl p-2" name="paragraphTemp" id="paragraphTemp" cols="10" rows="10" placeholder="Entrez votre texte"></textarea>
+        <div class="flex flex-col gap-3 items-center bg-yellow-950/10 p-2 rounded-xl">
+            <textarea class="w-full h-fit border-1 rounded-xl p-2" name="paragraphTemp" id="paragraphTemp" cols="10" rows="10" placeholder="Entrez votre texte"></textarea>
     
-        <div class="flex flex-row gap-5">
-            <button type="button" id="fixTempParagraph" class="bg-green-700 rounded-3xl text-2xl p-2 text-white">Valider</button>
-            <button type="button" id="delTempParagraph" class="bg-red-700 rounded-3xl text-2xl p-2 text-white">Supprimer</button>
-        </div>
-        
-        <div id="fixedParagraph" class="flex flex-col gap-2" hidden>
-            <p class="w-full h-fit border-1 rounded-xl p-2" id="paragraphFixed"></p>
-        
             <div class="flex flex-row gap-5">
-                <button type="button" id="delFixedParagraph" class="bg-red-700 rounded-3xl text-2xl p-2 text-white">Supprimer</button>
+                <button type="submit" name="tempParagraph" value="'.$position.'" class="bg-green-700 rounded-3xl text-2xl p-2 text-white transition hover:scale-105">Valider</button>
+                <button type="button" id="delTempParagraph" class="bg-red-700 rounded-3xl text-2xl p-2 text-white">Supprimer</button>
             </div>
         </div>
         
-    </div>
+    </form>
     ';
 }
 
