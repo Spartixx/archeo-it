@@ -77,6 +77,55 @@ function getPendingBlog($creator_id){
 }
 
 
+function getMaxTextPosition($parent_id){
+    try {
+        /**
+         * Allows to get the maximum positon (the bottm element) in an article.
+         *
+         * @param int $blog_id    Corresponds to the article id.
+         * @return array-key      Corresponds to the user datas. keys : username, email, password, account_creation, admin
+         *
+         * @throws Exception      For any error.
+         */
+        global $pdo;
+        $req = "SELECT MAX(position) as total_elements FROM texts WHERE parent_id = :parent_id;";
+        $result = $pdo->prepare($req);
+        $result->execute(["parent_id" => $parent_id]);
+        if ($result->rowCount() > 0){
+            return $result->fetch();
+        }
+        return ["total_elements" => 0];
+
+    }catch(Exception $e){
+        alert("Une erreur interne est survenue... Veuillez réessayer", "danger");
+        return [];
+    }
+}
+
+function getCurrentBlog($id){
+
+    try {
+        /**
+         * Allows to get all blogs data
+         *
+         * @return array-key      Corresponds to the user datas. keys : username, email, password, account_creation, admin
+         *
+         * @throws Exception      For any error.
+         */
+        global $pdo;
+        $req = "SELECT * FROM blogs WHERE id = :id;";
+        $result = $pdo->prepare($req);
+        $result->execute(["id" => $id]);
+        return $result->fetch();
+
+    }catch(Exception $e){
+        alert("Une erreur interne est survenue... Veuillez réessayer", "danger");
+        return [];
+    }
+}
+
+
+
 function getArticleDatas($blog_id, $type=0){
 
     try {
@@ -89,7 +138,7 @@ function getArticleDatas($blog_id, $type=0){
          * @throws Exception      For any error.
          */
         global $pdo;
-        $req = "SELECT blogs.title, texts.content, texts.position, texts.element_type FROM blogs INNER JOIN texts ON blogs.id = texts.parent_id WHERE blogs.id = :blog_id AND texts.type = :type ORDER BY position ASC;";
+        $req = "SELECT blogs.title, texts.content, texts.position, texts.element_type, texts.id FROM blogs INNER JOIN texts ON blogs.id = texts.parent_id WHERE blogs.id = :blog_id AND texts.type = :type ORDER BY position ASC;";
         $result = $pdo->prepare($req);;
         $result->execute(["blog_id" => $blog_id, "type" => $type]);
         return $result->fetchAll();
@@ -116,7 +165,6 @@ function updateTitle($title, $blog_id){
         $req = "UPDATE blogs SET title = :title WHERE id = :id;";
         $result = $pdo->prepare($req);
         $result->execute(["title" => $title, "id" => $blog_id]);
-        alert("Le titre a bien été changé !", "success");
     }catch(Exception $e){
         alert("Une erreur interne est survenue... Veuillez réessayer", "danger");
     }
@@ -139,7 +187,6 @@ function insertText($paragraph, $parent_id, $position, $type=0, $element_type=0)
         $req = "INSERT INTO texts(type, content, parent_id, position, element_type) VALUES(:type, :content, :parent_id, :position, :element_type)";
         $result = $pdo->prepare($req);
         $result->execute(["type" => $type, "content" => $paragraph, "parent_id" => $parent_id, "position" => $position, "element_type" => $element_type]);
-        alert("Le texte a bien été ajouté !", "success");
     }catch(Exception $e){
         alert("Une erreur interne est survenue... Veuillez réessayer", "danger");
     }
@@ -166,35 +213,50 @@ function removeBlog($blog_id){
 }
 
 
-function moveElement($position, $direction="up"){
+function removeText($id){
+
+    try {
+        global $pdo;
+        $req = "DELETE FROM texts WHERE id = :id;";
+        $result = $pdo->prepare($req);
+        $result->execute(["id" => $id]);
+    }catch(Exception $e){
+        alert("Une erreur interne est survenue... Veuillez réessayer", "danger");
+    }
+}
+
+function moveElement($position, $parent_id, $direction="up", $type=0){
 
     try {
         /**
          * Allows to remove a blog
          * @param string $blog_id     Corresponds to the article id
+         * @return int                Corresponds to the status code
          *
          * @throws Exception          For any error.
          */
         global $pdo;
-        $req = $direction == "down" ? "SELECT id, position FROM texts WHERE position > :position ORDER BY position ASC LIMIT 1;" : "SELECT id, position FROM texts WHERE position < :position ORDER BY position DESC LIMIT 1;";
+        $req = $direction == "down" ? "SELECT id, position FROM texts WHERE position > :position AND parent_id = :parent_id AND type = :type ORDER BY position ASC LIMIT 1;" : "SELECT id, position FROM texts WHERE position < :position AND parent_id = :parent_id AND type = :type ORDER BY position DESC LIMIT 1;";
         $result = $pdo->prepare($req);
-        $result->execute(["position" => $position]);
+        $result->execute(["position" => $position, "parent_id" => $parent_id, "type" => $type]);
         $savedRow = $result->fetch();
 
         if($savedRow){
-            $result = $pdo->prepare("UPDATE texts SET position = :new_position WHERE position = :position;");
-            $result->execute(["new_position" => $savedRow["position"], "position" => $position]);
+            $result = $pdo->prepare("UPDATE texts SET position = :new_position WHERE position = :position AND parent_id = :parent_id AND type = :type;");
+            $result->execute(["new_position" => $savedRow["position"], "position" => $position, "parent_id" => $parent_id, "type" => $type]);
 
-            $result = $pdo->prepare("UPDATE texts SET position = :new_position WHERE id = :id;");
-            $result->execute(["new_position" => $position, "id" => $savedRow["id"]]);
+            $result = $pdo->prepare("UPDATE texts SET position = :new_position WHERE id = :id AND parent_id = :parent_id AND type = :type;");
+            $result->execute(["new_position" => $position, "id" => $savedRow["id"], "parent_id" => $parent_id, 'type' => $type]);
+            return 1;
         }else{
             $directionFormat = $direction == "up" ? "haut" : "bas";
-            alert("Cet élément ce situe déjà à l'endroit le plus.".$directionFormat."!", "warning");
+            alert("Cet élément ce situe déjà à l'endroit le plus ".$directionFormat." !", "warning");
         }
+        return 0;
 
-        alert("L'élément a bien été déplacé !", "success");
     }catch(Exception $e){
         alert("Une erreur interne est survenue... Veuillez réessayer", "danger");
+        return 0;
     }
 }
 

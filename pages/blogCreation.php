@@ -14,7 +14,8 @@ $blog_id = isset($_GET['blog_id']) ? $_GET['blog_id'] : 0;
 $bypassPendings = isset($_GET['bypass']);
 
 $blogDatas = getArticleDatas($blog_id);
-$totalElements = count($blogDatas);
+$blogPrimaryDatas = getCurrentBlog($blog_id);
+$totalElements = getMaxTextPosition((int)$blog_id)["total_elements"];
 
 
 ?>
@@ -48,51 +49,79 @@ $totalElements = count($blogDatas);
 <div class="flex flex-col gap-[7rem] justify-between p-5">
 
     <?php
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if(isset($_POST["removeBlogBtn"])){
-                $blogToRemove = (int)$_POST["removeBlogBtn"];
-                removeBlog($blogToRemove);
-            }
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($_POST["removeBlogBtn"])){
+            $blogToRemove = (int)$_POST["removeBlogBtn"];
+            removeBlog($blogToRemove);
+        }
 
-            if(isset($_POST["tempParagraph"])){
-                $content = isset($_POST["paragraphTemp"]) ? $_POST["paragraphTemp"] : "";
+        if(isset($_POST["tempParagraph"])){
+            if(isset($_POST["paragraphTemp"])){
+                $content = $_POST["paragraphTemp"];
                 if(strlen($content) < 100){
                     alert("Veuillez entrer au moins 100 caractère pour créer un paragraphe !", "warning");
                 }else{
                     insertText($content, (int)$blog_id, (int)$_POST["tempParagraph"]);
+                    header("Location: ./blogCreation.php?blog_id=".$blog_id);
                 }
 
-            }
-
-            if(isset($_POST["sendTitleBtn"])){
-                $title = isset($_POST["tempTitle"]) ? $_POST["tempTitle"] : "";
-                if(strlen($title) < 4){
-                    alert("Veuillez entrer au moins 4 caractère pour créer un paragraphe !", "warning");
+            }else if(isset($_POST["subtitleTemp"])){
+                echo "oui";
+                $content = $_POST["subtitleTemp"];
+                if(strlen($content) < 20){
+                    alert("Veuillez entrer au moins 100 caractère pour créer un paragraphe !", "warning");
                 }else{
-                    updateTitle($title, (int)$blog_id);
-                }
-            }
-
-            if(isset($_POST["textDownBtn"])){
-                $elementPosition = $_POST["textDownBtn"];
-                if((int)$elementPosition >= $totalElements){
-                    alert("Cet élément déjà au plus bas possible !", "warning");
-                }else{
-                    moveElement($elementPosition, "down");
+                    insertText($content, (int)$blog_id, (int)$_POST["tempParagraph"], 0, 1);
                     header("Location: ./blogCreation.php?blog_id=".$blog_id);
                 }
             }
 
-            if(isset($_POST["textUpBtn"])){
-                $elementPosition = $_POST["textUpBtn"];
-                if((int)$elementPosition <= 1){
-                    alert("Cet élément déjà au plus haut possible !", "warning");
-                }else{
-                    moveElement($elementPosition, "up");
-                    header("Location: ./blogCreation.php?blog_id=".$blog_id);
-                }
+        }
+
+        if(isset($_POST["tempSubtitle"])){
+            $content = isset($_POST["paragraphTemp"]) ? $_POST["paragraphTemp"] : "";
+            if(strlen($content) < 100){
+                alert("Veuillez entrer au moins 100 caractère pour créer un paragraphe !", "warning");
+            }else{
+                insertText($content, (int)$blog_id, (int)$_POST["tempParagraph"]);
+                header("Location: ./blogCreation.php?blog_id=".$blog_id);
+
+            }
+
+        }
+
+        if(isset($_POST["sendTitleBtn"])){
+            $title = isset($_POST["tempTitle"]) ? $_POST["tempTitle"] : "";
+            if(strlen($title) < 4){
+                alert("Veuillez entrer au moins 4 caractère pour créer un paragraphe !", "warning");
+            }else{
+                updateTitle($title, (int)$blog_id);
+                header("Location: ./blogCreation.php?blog_id=".$blog_id);
             }
         }
+
+        if(isset($_POST["textDownBtn"])){
+            $elementPosition = $_POST["textDownBtn"];
+            $statusCode = moveElement($elementPosition, (int)$blog_id, $direction="down");
+            if($statusCode){
+                header("Location: ./blogCreation.php?blog_id=".$blog_id);
+            }
+        }
+
+        if(isset($_POST["textUpBtn"])){
+            $elementPosition = $_POST["textUpBtn"];
+            $statusCode = moveElement($elementPosition, (int)$blog_id, $direction="up");
+            if($statusCode){
+                header("Location: ./blogCreation.php?blog_id=".$blog_id);
+            }
+        }
+
+        if(isset($_POST["deleteTextBtn"])){
+            $textId = $_POST["deleteTextBtn"];
+            removeText($textId);
+            header("Location: ./blogCreation.php?blog_id=".$blog_id);
+        }
+    }
     ?>
 
     <?php if($blog_id == 0 && isset($_SESSION["user"]["admin"]) && $_SESSION["user"]["admin"] == 1) {
@@ -132,94 +161,96 @@ $totalElements = count($blogDatas);
 
 
     }else if(isset($_SESSION["user"]) && $_SESSION["user"]["admin"] == 1){?>
-    <form method="post" class="flex flex-col gap-10 mt-5">
+        <form method="post" class="flex flex-col gap-10 mt-5">
 
-        <?php
+            <?php
 
-        if(isset($blogDatas[0]["title"])){?>
-            <div class="flex flex-col gap-3 items-center bg-yellow-950/10 p-2 rounded-xl">
-                <h1 class="text-center w-full text-4xl cinzel"><?= $blogDatas[0]["title"] ?></h1>
-            </div>
-        <?php }else{?>
-            <form >
+            if(isset($blogPrimaryDatas["title"])){?>
                 <div class="flex flex-col gap-3 items-center bg-yellow-950/10 p-2 rounded-xl">
-                    <input type="text" name="tempTitle" placeholder="Entrez votre titre" class="text-center w-full text-4xl cinzel">
-
-                    <div class="flex flex-row gap-5">
-                        <button type="submit" name="sendTitleBtn" class="bg-green-700 rounded-3xl text-2xl p-2 text-white">Valider</button>
-                        <button type="submit" class="bg-red-700 rounded-3xl text-2xl p-2 text-white">Supprimer</button>
-                    </div>
+                    <h1 class="text-center w-full text-4xl cinzel"><?= $blogPrimaryDatas["title"] ?></h1>
                 </div>
-            </form>
-        <?php }
+            <?php }else{?>
+                <form >
+                    <div class="flex flex-col gap-3 items-center bg-yellow-950/10 p-2 rounded-xl">
+                        <input type="text" name="tempTitle" placeholder="Entrez votre titre" class="text-center w-full text-4xl cinzel">
 
-        foreach($blogDatas as $element) {
-           if($element["element_type"] == 0){?>
-               <div class="flex flex-row gap-3 items-center bg-yellow-950/10 p-2 rounded-xl">
-                   <div class="w-full">
-                       <p class="text-start w-full text-m"><?= $element["content"] ?></p>
-                   </div>
+                        <div class="flex flex-row gap-5">
+                            <button type="submit" name="sendTitleBtn" class="bg-green-700 rounded-3xl text-2xl p-2 text-white">Valider</button>
+                            <button type="submit" class="bg-red-700 rounded-3xl text-2xl p-2 text-white">Supprimer</button>
+                        </div>
+                    </div>
+                </form>
+            <?php }
 
-                   <div class="w-fit flex flex-col gap-3 justify-center items-center">
-                       <button type="submit" name="textUpBtn" value="<?= $element["position"] ?>">
-                           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg>
-                       </button>
-                       <button type="submit" name="textDownBtn" value="<?= $element["position"] ?>">
-                           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
-                       </button>
-                   </div>
-               </div>
-           <?php } else if($element["element_type"] == 1){?>
-               <div class="flex flex-row gap-3 items-center w-fit">
-                   <p class="text-start w-full text-xl cinzel"><?= $element["content"] ?></p>
+            foreach($blogDatas as $element) {
+                if($element["element_type"] == 0){?>
+                    <div class="flex flex-col gap-1">
+                        <div class="flex flex-row gap-3 items-center bg-yellow-950/10 p-2 rounded-xl">
+                            <div class="w-full">
+                                <p class="text-start w-full text-m break-all"><?= $element["content"] ?></p>
+                            </div>
 
-                   <div class="w-fit flex flex-col gap-3 justify-center items-center">
-                       <button type="submit" name="textUpBtn" value="<?= $element["position"] ?>">
-                           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg>
-                       </button>
-                       <button type="submit" name="textDownBtn" value="<?= $element["position"] ?>">
-                           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
-                       </button>
-                   </div>
-               </div>
-           <?php }
-        } ?>
+                            <div class="w-fit flex flex-col gap-3 justify-center items-center">
+                                <button type="submit" name="textUpBtn" value="<?= $element["position"] ?>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg>
+                                </button>
+                                <button type="submit" name="textDownBtn" value="<?= $element["position"] ?>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
+                                </button>
+                            </div>
+                        </div>
 
-        <?php
+                        <button type="submit" name="deleteTextBtn" value="<?= $element["id"] ?>" class="bg-red-800/75 rounded-3xl text-2xl p-2 text-white">Supprimer</button>
+                    </div>
+                <?php } else if($element["element_type"] == 1){?>
+                    <div class="flex flex-row gap-3 items-center w-fit">
+                        <p class="text-start w-full text-xl cinzel"><?= $element["content"] ?></p>
 
-        if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["blockSelection"])) {
-            switch($_POST["blockSelection"]) {
-                case "1":
-                    $totalElements++;
-                    addSubtitle();
-                    break;
-                case "2":
-                    $totalElements++;
-                    echo "paragraph added.";
-                    addParagraph($totalElements);
-                    break;
-                case "3":
-                    echo "image";
-                    break;
+                        <div class="w-fit flex flex-col gap-3 justify-center items-center">
+                            <button type="submit" name="textUpBtn" value="<?= $element["position"] ?>">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg>
+                            </button>
+                            <button type="submit" name="textDownBtn" value="<?= $element["position"] ?>">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                <?php }
+            } ?>
+
+            <?php
+
+            if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["blockSelection"])) {
+                switch($_POST["blockSelection"]) {
+                    case "1":
+                        $totalElements++;
+                        addSubtitle($totalElements);
+                        break;
+                    case "2":
+                        $totalElements++;
+                        addParagraph($totalElements);
+                        break;
+                    case "3":
+                        break;
+                }
             }
-        }
 
-        ?>
+            ?>
 
-        <div class="flex flex-col flex-wrap gap-3">
-            <h3 class="text-xl cinzel text-center">Séléctionnez un bloc à ajouter</h3>
-            <select class="text-black border-1 border-yellow-950/30 rounded-sm p-1 bg-yellow-950/20 shadow-lg" name="blockSelection" id="blockSelection">
-                <option value="1">Sous titre</option>
-                <option value="2">Paragraphe</option>
-                <option value="3" selected>Image</option>
-            </select>
-            <div class="flex flex-row w-full justify-center">
-                <button type="submit" class="p-2 text-xl bg-yellow-950/50 rounded-lg px-8 w-fit text-center transition hover:bg-yellow-950/70 hover:scale-105">Ajouter un bloc</button>
+            <div class="flex flex-col flex-wrap gap-3">
+                <h3 class="text-xl cinzel text-center">Séléctionnez un bloc à ajouter</h3>
+                <select class="text-black border-1 border-yellow-950/30 rounded-sm p-1 bg-yellow-950/20 shadow-lg" name="blockSelection" id="blockSelection">
+                    <option value="1">Sous titre</option>
+                    <option value="2">Paragraphe</option>
+                    <option value="3" selected>Image</option>
+                </select>
+                <div class="flex flex-row w-full justify-center">
+                    <button type="submit" class="p-2 text-xl bg-yellow-950/50 rounded-lg px-8 w-fit text-center transition hover:bg-yellow-950/70 hover:scale-105">Ajouter un bloc</button>
+                </div>
+
             </div>
 
-        </div>
-
-    </form>
+        </form>
     <?php }else{
         header("Location:/");
     }?>
