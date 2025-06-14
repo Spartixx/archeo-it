@@ -6,7 +6,7 @@ include_once "/var/www/archeo-it/components/alert.php";
  * Allows to handle the user registration and login.
  */
 
-function insertBlog($creator_id) {
+function insertBlog($creator_id, $type) {
     try {
         /**
          * Insert a blog.
@@ -18,9 +18,9 @@ function insertBlog($creator_id) {
          */
         global $pdo;
 
-        $req = "INSERT INTO blogs(creator_id, creation_date) VALUES (:creator_id, CURRENT_DATE)";
+        $req = "INSERT INTO blogs(creator_id, creation_date, type) VALUES (:creator_id, CURRENT_DATE, :type)";
         $stmt = $pdo->prepare($req);
-        $stmt->execute(["creator_id" => $creator_id]);
+        $stmt->execute(["creator_id" => $creator_id, "type" => $type]);
         return $pdo->lastInsertId();
     } catch (Exception $e) {
         alert("Une erreur interne est survenue... Veuillez réessayer", "danger");
@@ -31,7 +31,7 @@ function insertBlog($creator_id) {
 
 
 
-function getBlogsDatas(){
+function getBlogsDatas($type){
 
     try {
         /**
@@ -42,8 +42,9 @@ function getBlogsDatas(){
          * @throws Exception      For any error.
          */
         global $pdo;
-        $req = "SELECT * FROM blogs";
+        $req = "SELECT * FROM blogs WHERE type = :type";
         $result = $pdo->prepare($req);
+        $result->execute(["type" => $type]);
         return $result->fetchAll();
 
 
@@ -54,7 +55,7 @@ function getBlogsDatas(){
 }
 
 
-function getPendingBlog($creator_id){
+function getPendingBlog($creator_id, $articleType){
 
     try {
         /**
@@ -65,13 +66,13 @@ function getPendingBlog($creator_id){
          * @throws Exception      For any error.
          */
         global $pdo;
-        $req = "SELECT * FROM blogs WHERE creator_id = :creator_id;";
+        $req = "SELECT * FROM blogs WHERE creator_id = :creator_id AND type = :article_type;";
         $result = $pdo->prepare($req);
-        $result->execute(["creator_id" => $creator_id]);
+        $result->execute(["creator_id" => $creator_id, "article_type" => $articleType]);
         return $result->fetchAll();
 
     }catch(Exception $e){
-        alert("Une erreur interne est survenue... Veuillez réessayer", "danger");
+        echo $e;
         return [];
     }
 }
@@ -156,7 +157,7 @@ function updateTitle($title, $blog_id){
 
     try {
         /**
-         * Allows to get all blogs data
+         * Allows to update the article title.
          * @param string $title   Corresponds to the article's title.
          *
          * @throws Exception      For any error.
@@ -169,6 +170,47 @@ function updateTitle($title, $blog_id){
         alert("Une erreur interne est survenue... Veuillez réessayer", "danger");
     }
 }
+
+
+function updateDescription($description, $blog_id){
+
+    try {
+        /**
+         * Allows to update the article description
+         * @param string $description   Corresponds to the article's description.
+         *
+         * @throws Exception      For any error.
+         */
+        global $pdo;
+        $req = "UPDATE blogs SET description = :description WHERE id = :id;";
+        $result = $pdo->prepare($req);
+        $result->execute(["description" => $description, "id" => $blog_id]);
+    }catch(Exception $e){
+        alert("Une erreur interne est survenue... Veuillez réessayer", "danger");
+    }
+}
+
+
+function updateImage($image, $blog_id){
+
+    try {
+        /**
+         * Allows to update the article image
+         * @param string $image   Corresponds to the article image.
+         *
+         * @throws Exception      For any error.
+         */
+        global $pdo;
+        $req = "UPDATE blogs SET image = :image WHERE id = :id;";
+        $result = $pdo->prepare($req);
+        $result->execute(["image" => $image, "id" => $blog_id]);
+    }catch(Exception $e){
+        alert("Une erreur interne est survenue... Veuillez réessayer", "danger");
+    }
+}
+
+
+
 
 function insertText($paragraph, $parent_id, $position, $type=0, $element_type=0){
 
@@ -206,7 +248,6 @@ function removeBlog($blog_id){
         $req = "DELETE FROM blogs WHERE id = :blog_id;";
         $result = $pdo->prepare($req);
         $result->execute(["blog_id" => $blog_id]);
-        alert("Le blog a bien été supprimé", "success");
     }catch(Exception $e){
         alert("Une erreur interne est survenue... Veuillez réessayer", "danger");
     }

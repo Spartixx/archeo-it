@@ -5,17 +5,137 @@ ini_set('display_errors', 1);
 
 session_start();
 
-include("../components/alert.php");
-include("../components/ArticleBlocks.php");
 include("../utils/database/connection.php");
 include("../utils/database/blog.php");
 
+
 $blog_id = isset($_GET['blog_id']) ? $_GET['blog_id'] : 0;
+$articleType = isset($_GET['type']) ? $_GET['type'] : 0;
 $bypassPendings = isset($_GET['bypass']);
 
 $blogDatas = getArticleDatas($blog_id);
 $blogPrimaryDatas = getCurrentBlog($blog_id);
 $totalElements = getMaxTextPosition((int)$blog_id)["total_elements"];
+
+if ($blog_id == 0 && isset($_SESSION["user"]["admin"]) && $_SESSION["user"]["admin"] == 1) {
+    $pendingBlog = getPendingBlog($_SESSION["user"]["id"], $articleType);
+
+    if ($bypassPendings || count($pendingBlog) == 0) {
+        $blogId = insertBlog($_SESSION["user"]["id"], $articleType);
+        header("Location: blogCreation.php?blog_id=".$blogId."&type=".$articleType);
+        exit();
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST["removeBlogBtn"])) {
+        $blogToRemove = (int)$_POST["removeBlogBtn"];
+        removeBlog($blogToRemove);
+        header("location: ./blogCreation.php?type=$articleType");
+    }
+
+    if (isset($_POST["tempParagraph"])) {
+        if (isset($_POST["paragraphTemp"])) {
+            $content = $_POST["paragraphTemp"];
+            if (strlen($content) < 100) {
+                alert("Veuillez entrer au moins 100 caractère pour créer un paragraphe !", "warning");
+            } else {
+                insertText($content, (int)$blog_id, (int)$_POST["tempParagraph"], $articleType);
+                header("Location: ./blogCreation.php?blog_id=" . $blog_id);
+            }
+
+        } else if (isset($_POST["subtitleTemp"])) {
+            echo "oui";
+            $content = $_POST["subtitleTemp"];
+            if (strlen($content) < 20) {
+                alert("Veuillez entrer au moins 100 caractère pour créer un paragraphe !", "warning");
+            } else {
+                insertText($content, (int)$blog_id, (int)$_POST["tempParagraph"], $articleType, 1);
+                header("Location: ./blogCreation.php?blog_id=" . $blog_id);
+            }
+
+        }
+        if (isset($_FILES["imageTemp"])) {
+            $imgName = count(scandir("../assets/img/userUploads"));
+            move_uploaded_file($_FILES["imageTemp"]["tmp_name"], "../assets/img/userUploads/" . $imgName);
+            insertText($imgName, (int)$blog_id, (int)$_POST["tempParagraph"], $articleType, 2);
+        }
+
+    }
+
+
+    if (isset($_POST["sendTitleBtn"])) {
+        $title = isset($_POST["tempTitle"]) ? $_POST["tempTitle"] : "";
+        if (strlen($title) < 4) {
+            alert("Veuillez entrer au moins 4 caractère pour créer un paragraphe !", "warning");
+        } else {
+            updateTitle($title, (int)$blog_id);
+            header("Location: ./blogCreation.php?blog_id=" . $blog_id);
+        }
+    }
+
+
+    if (isset($_POST["sendDescriptionBtn"])) {
+        $title = isset($_POST["tempDescription"]) ? $_POST["tempDescription"] : "";
+        if (strlen($title) > 255) {
+            alert("Veuillez entrer 255 caractères maximum pour créer une description !", "warning");
+        } else {
+            updateDescription($title, (int)$blog_id);
+            header("Location: ./blogCreation.php?blog_id=" . $blog_id);
+        }
+    }
+
+
+    if (isset($_POST["sendImageBtn"])) {
+        if (isset($_FILES["tempImage"])) {
+            $imgName = count(scandir("../assets/img/userUploads"));
+            move_uploaded_file($_FILES["tempImage"]["tmp_name"], "../assets/img/userUploads/" . $imgName);
+            updateImage($imgName, (int)$blog_id);
+            header("Location: ./blogCreation.php?blog_id=" . $blog_id);
+        }
+
+    }
+
+
+    if (isset($_POST["textDownBtn"])) {
+        $elementPosition = $_POST["textDownBtn"];
+        $statusCode = moveElement($elementPosition, (int)$blog_id, $direction = "down", $articleType);
+        if ($statusCode) {
+            header("Location: ./blogCreation.php?blog_id=" . $blog_id);
+        }
+    }
+
+    if (isset($_POST["textUpBtn"])) {
+        $elementPosition = $_POST["textUpBtn"];
+        $statusCode = moveElement($elementPosition, (int)$blog_id, $direction = "up", $articleType);
+        if ($statusCode) {
+            header("Location: ./blogCreation.php?blog_id=" . $blog_id);
+        }
+    }
+
+    if (isset($_POST["deleteTextBtn"])) {
+        $textId = $_POST["deleteTextBtn"];
+        removeText($textId);
+        header("Location: ./blogCreation.php?blog_id=" . $blog_id);
+    }
+
+    if (isset($_POST["editTitle"])) {
+        updateTitle(null, (int)$blog_id);
+        header("Location: ./blogCreation.php?blog_id=" . $blog_id);
+    }
+
+    if (isset($_POST["editDescription"])) {
+        updateDescription(null, (int)$blog_id);
+        header("Location: ./blogCreation.php?blog_id=" . $blog_id);
+    }
+
+    if (isset($_POST["editImage"])) {
+        updateImage(null, (int)$blog_id);
+        unlink("../assets/img/userUploads/" . $imgName);
+        header("Location: ./blogCreation.php?blog_id=" . $blog_id);
+    }
+}
+
 
 
 ?>
@@ -35,152 +155,100 @@ $totalElements = getMaxTextPosition((int)$blog_id)["total_elements"];
 
 </head>
 
-<header>
-    <?php include("../components/header.php"); ?>
-
-
-
-</header>
-
 
 <body>
+
+    <?php include("../components/header.php");
+    include("../components/ArticleBlocks.php");?>
+
 
 
 <div class="flex flex-col gap-[7rem] justify-between p-5">
 
-    <?php
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if(isset($_POST["removeBlogBtn"])){
-            $blogToRemove = (int)$_POST["removeBlogBtn"];
-            removeBlog($blogToRemove);
-        }
-
-        if(isset($_POST["tempParagraph"])){
-            if(isset($_POST["paragraphTemp"])){
-                $content = $_POST["paragraphTemp"];
-                if(strlen($content) < 100){
-                    alert("Veuillez entrer au moins 100 caractère pour créer un paragraphe !", "warning");
-                }else{
-                    insertText($content, (int)$blog_id, (int)$_POST["tempParagraph"]);
-                    header("Location: ./blogCreation.php?blog_id=".$blog_id);
-                }
-
-            }else if(isset($_POST["subtitleTemp"])){
-                echo "oui";
-                $content = $_POST["subtitleTemp"];
-                if(strlen($content) < 20){
-                    alert("Veuillez entrer au moins 100 caractère pour créer un paragraphe !", "warning");
-                }else{
-                    insertText($content, (int)$blog_id, (int)$_POST["tempParagraph"], 0, 1);
-                    header("Location: ./blogCreation.php?blog_id=".$blog_id);
-                }
-            }
-
-        }
-
-        if(isset($_POST["tempSubtitle"])){
-            $content = isset($_POST["paragraphTemp"]) ? $_POST["paragraphTemp"] : "";
-            if(strlen($content) < 100){
-                alert("Veuillez entrer au moins 100 caractère pour créer un paragraphe !", "warning");
-            }else{
-                insertText($content, (int)$blog_id, (int)$_POST["tempParagraph"]);
-                header("Location: ./blogCreation.php?blog_id=".$blog_id);
-
-            }
-
-        }
-
-        if(isset($_POST["sendTitleBtn"])){
-            $title = isset($_POST["tempTitle"]) ? $_POST["tempTitle"] : "";
-            if(strlen($title) < 4){
-                alert("Veuillez entrer au moins 4 caractère pour créer un paragraphe !", "warning");
-            }else{
-                updateTitle($title, (int)$blog_id);
-                header("Location: ./blogCreation.php?blog_id=".$blog_id);
-            }
-        }
-
-        if(isset($_POST["textDownBtn"])){
-            $elementPosition = $_POST["textDownBtn"];
-            $statusCode = moveElement($elementPosition, (int)$blog_id, $direction="down");
-            if($statusCode){
-                header("Location: ./blogCreation.php?blog_id=".$blog_id);
-            }
-        }
-
-        if(isset($_POST["textUpBtn"])){
-            $elementPosition = $_POST["textUpBtn"];
-            $statusCode = moveElement($elementPosition, (int)$blog_id, $direction="up");
-            if($statusCode){
-                header("Location: ./blogCreation.php?blog_id=".$blog_id);
-            }
-        }
-
-        if(isset($_POST["deleteTextBtn"])){
-            $textId = $_POST["deleteTextBtn"];
-            removeText($textId);
-            header("Location: ./blogCreation.php?blog_id=".$blog_id);
-        }
-    }
-    ?>
-
     <?php if($blog_id == 0 && isset($_SESSION["user"]["admin"]) && $_SESSION["user"]["admin"] == 1) {
-        $pendingBlog = getPendingBlog($_SESSION["user"]["id"]);
-        if($pendingBlog != false && !$bypassPendings) {?>
-            <form method="post" class="flex flex-col gap-5 w-full items-center">
+
+        $pendingBlog = getPendingBlog($_SESSION["user"]["id"], $articleType);
+        if($pendingBlog && !$bypassPendings) {?>
+            <form method="post" class="flex flex-col gap-5 w-full items-center" enctype="multipart/form-data">
                 <h2 class="cinzel text-4xl">Vous avez déjà un ou plusieurs blog en cours de création :</h2>
 
                 <div class="w-fit h-fit bg-white flex flex-row gap-3">
-
-
                     <?php foreach($pendingBlog as $blog) { ?>
-
                         <div class="w-fit h-fit flex flex-col gap-3 p-2 bg-yellow-950/30 justify-between rounded-xl">
                             <h3 class="text-3xl font-regular text-black text-center min-w-[15rem]"><?= isset($blog["title"]) ? $blog["title"] : "titre non définit" ?></h3>
-
                             <div class="flex flex-col gap-3">
                                 <a href="blogCreation.php?blog_id=<?= $blog['id'] ?>" class="bg-green-700 rounded-3xl text-2xl p-2 px-4 text-white text-center">Modifier</a>
                                 <button type="submit" name="removeBlogBtn" id="removeBlogBtn<?= $blog["id"] ?>" value="<?= $blog["id"] ?>" class="bg-red-700 rounded-3xl text-2xl p-2 px-4 text-white text-center">Supprimer</button>
                             </div>
-
                             <p><?= isset($blog["creation_date"]) ? $blog["creation_date"] : "Date indisponible" ?></p>
                         </div>
-
                     <?php }?>
                 </div>
 
                 <div>
-                    <a href="blogCreation.php?bypass=1" id="createNewBlog" class="p-3 bg-green-700 text-3xl rounded-xl text-white">Ignorer et créer un nouveau blog</a>
+                    <a href="blogCreation.php?bypass=1&type=<?= $articleType ?>" id="createNewBlog" class="p-3 bg-green-700 text-3xl rounded-xl text-white">Ignorer et créer un nouveau blog</a>
                 </div>
             </form>
 
-        <?php }else{
-            $blogId = insertBlog($_SESSION["user"]["id"]);
-            header("Location: blogCreation.php?blog_id=".$blogId);
-        }
+        <?php }
 
 
     }else if(isset($_SESSION["user"]) && $_SESSION["user"]["admin"] == 1){?>
-        <form method="post" class="flex flex-col gap-10 mt-5">
+        <form method="post" class="flex flex-col gap-10 mt-5 items-center" enctype="multipart/form-data">
 
-            <?php
-
-            if(isset($blogPrimaryDatas["title"])){?>
+            <?php if(isset($blogPrimaryDatas["title"])){?>
                 <div class="flex flex-col gap-3 items-center bg-yellow-950/10 p-2 rounded-xl">
                     <h1 class="text-center w-full text-4xl cinzel"><?= $blogPrimaryDatas["title"] ?></h1>
+                    <button type="submit" name="editTitle" class="bg-yellow-800/75 rounded-3xl text-2xl p-2 text-white">Modifier</button>
                 </div>
+
             <?php }else{?>
-                <form >
+                <div >
                     <div class="flex flex-col gap-3 items-center bg-yellow-950/10 p-2 rounded-xl">
                         <input type="text" name="tempTitle" placeholder="Entrez votre titre" class="text-center w-full text-4xl cinzel">
-
                         <div class="flex flex-row gap-5">
                             <button type="submit" name="sendTitleBtn" class="bg-green-700 rounded-3xl text-2xl p-2 text-white">Valider</button>
-                            <button type="submit" class="bg-red-700 rounded-3xl text-2xl p-2 text-white">Supprimer</button>
                         </div>
                     </div>
-                </form>
+                </div>
             <?php }
+
+            if(isset($blogPrimaryDatas["description"])){?>
+            <div class="flex flex-col gap-3 items-center bg-yellow-950/10 p-2 rounded-xl">
+                <h2 class="text-center w-full text-2xl w-full"><?= $blogPrimaryDatas["description"] ?></h2>
+                <button type="submit" name="editDescription" class="bg-yellow-800/75 rounded-3xl text-2xl p-2 text-white">Modifier</button>
+            </div>
+
+            <?php }else{?>
+            <div class="w-full">
+                <div class="flex flex-col gap-3 items-center bg-yellow-950/10 p-2 rounded-xl w-full">
+                    <input type="text" name="tempDescription" placeholder="Entrez votre description (255 caractère maximum)" class="text-center w-full text-2xl">
+                    <div class="flex flex-row gap-5">
+                        <button type="submit" name="sendDescriptionBtn" class="bg-green-700 rounded-3xl text-2xl p-2 text-white">Valider</button>
+                    </div>
+                </div>
+            </div>
+            <?php }
+
+            if(isset($blogPrimaryDatas["image"])){?>
+                <div class="flex flex-col gap-3 items-center bg-yellow-950/10 p-2 rounded-xl">
+                    <p class="text-center w-full text-2xl w-full">Image du blog :</p>
+                    <img src="../assets/img/userUploads/<?= $blogPrimaryDatas["image"] ?>" class="rounded-xl" alt="">
+                    <button type="submit" name="editImage" value="<?= $blogPrimaryDatas["image"] ?>" class="bg-yellow-800/75 rounded-3xl text-2xl p-2 text-white">Modifier</button>
+                </div>
+
+            <?php }else{?>
+                <div  class="flex flex-row justify-center">
+                    <div class="flex flex-col gap-3 items-center bg-yellow-950/10 p-2 rounded-xl w-fit">
+                        <p class="text-center text-2xl">Entrez l'image du blog :</p>
+                        <input type="file" name="tempImage" class="text-l bg-white rounded-xl p-2 h-20">
+                        <div class="flex flex-row gap-5">
+                            <button type="submit" name="sendImageBtn" class="bg-green-700 rounded-3xl text-2xl p-2 text-white">Valider</button>
+                        </div>
+                    </div>
+                </div>
+            <?php }
+
 
             foreach($blogDatas as $element) {
                 if($element["element_type"] == 0){?>
@@ -202,25 +270,47 @@ $totalElements = getMaxTextPosition((int)$blog_id)["total_elements"];
 
                         <button type="submit" name="deleteTextBtn" value="<?= $element["id"] ?>" class="bg-red-800/75 rounded-3xl text-2xl p-2 text-white">Supprimer</button>
                     </div>
-                <?php } else if($element["element_type"] == 1){?>
-                    <div class="flex flex-row gap-3 items-center w-fit">
-                        <p class="text-start w-full text-xl cinzel"><?= $element["content"] ?></p>
 
-                        <div class="w-fit flex flex-col gap-3 justify-center items-center">
-                            <button type="submit" name="textUpBtn" value="<?= $element["position"] ?>">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg>
-                            </button>
-                            <button type="submit" name="textDownBtn" value="<?= $element["position"] ?>">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
-                            </button>
+                <?php } else if($element["element_type"] == 1){?>
+                    <div class="flex flex-col gap-1 w-fit">
+                        <div class="flex flex-row gap-3 items-center w-fit">
+                            <p class="text-start w-full text-xl cinzel"><?= $element["content"] ?></p>
+
+                            <div class="w-fit flex flex-col gap-3 justify-center items-center">
+                                <button type="submit" name="textUpBtn" value="<?= $element["position"] ?>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg>
+                                </button>
+                                <button type="submit" name="textDownBtn" value="<?= $element["position"] ?>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
+                                </button>
+                            </div>
                         </div>
+
+                        <button type="submit" name="deleteTextBtn" value="<?= $element["id"] ?>" class="bg-red-800/75 rounded-3xl text-2xl p-2 text-white">Supprimer</button>
+
+                    </div>
+                <?php } else if($element["element_type"] == 2){?>
+                    <div class="flex flex-col gap-1 w-fit">
+                        <div class="flex flex-row gap-3 items-center w-fit">
+                            <img class="rounded-xl" src="../assets/img/userUploads/<?= $element["content"] ?>" alt="">
+        
+                            <div class="w-fit flex flex-col gap-3 justify-center items-center">
+                                <button type="submit" name="textUpBtn" value="<?= $element["position"] ?>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg>
+                                </button>
+                                <button type="submit" name="textDownBtn" value="<?= $element["position"] ?>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+        
+                        <button type="submit" name="deleteTextBtn" value="<?= $element["id"] ?>" class="bg-red-800/75 rounded-3xl text-2xl p-2 text-white">Supprimer</button>
+        
                     </div>
                 <?php }
-            } ?>
+            }
 
-            <?php
-
-            if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["blockSelection"])) {
+            if(isset($_POST["blockSelection"])) {
                 switch($_POST["blockSelection"]) {
                     case "1":
                         $totalElements++;
@@ -231,10 +321,11 @@ $totalElements = getMaxTextPosition((int)$blog_id)["total_elements"];
                         addParagraph($totalElements);
                         break;
                     case "3":
+                        $totalElements++;
+                        addImage($totalElements);
                         break;
                 }
             }
-
             ?>
 
             <div class="flex flex-col flex-wrap gap-3">
@@ -251,8 +342,11 @@ $totalElements = getMaxTextPosition((int)$blog_id)["total_elements"];
             </div>
 
         </form>
+
+
+
     <?php }else{
-        header("Location:/");
+        header("location: /");
     }?>
 
 
