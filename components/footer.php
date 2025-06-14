@@ -14,7 +14,7 @@
                 <li><a href="/" class="hover:underline">Accueil</a></li>
                 <li><a href="/pages/blogfouilles.php" class="hover:underline">Blog</a></li>
                 <li><a href="/pages/chantier.php" class="hover:underline">Nos Chantiers</a></li>
-                <li><a href="/contact.php" class="hover:underline">Contact</a></li>
+                <li><a href="/pages/contact.php" class="hover:underline">Contact</a></li>
             </ul>
         </div>
 
