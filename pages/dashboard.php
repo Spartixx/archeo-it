@@ -85,10 +85,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             <h3 class="md:text-2xl lg:text-4xl sm:text-xl text-xl cinzel font-semibold"><?= $mode == "infos" ? "Vos informations" : "Panneau administrateur" ?></h3>
 
-            <form class="my-5" method="post">
-                <button name="handleMembersBtn" type="submit" class="p-2 px-8 text-2xl bg-yellow-950 text-white rounded-xl transition hover:bg-yellow-950/90 hover:scale-103">Gérer les membres</button>
-            </form>
-
             <?php if($mode == "infos"){ ?>
 
             <div class="flex flex-row flex-wrap justify-center w-full gap-5 p-3">
@@ -120,6 +116,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
 
             <?php }else{?>
+
+            <a href="./handleMembers.php" class="p-2 px-8 text-2xl bg-yellow-950 text-white rounded-xl transition hover:bg-yellow-950/90 hover:scale-103">Gérer les membres</a>
 
             <div class="flex flex-row flex-wrap justify-center w-full gap-5 p-3">
 
