@@ -29,7 +29,7 @@ session_start();
     <section class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-3 gap-10">
         <!-- Mission -->
         <div class="bg-white border rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-            <img src="../assets/img/icon-mission.png" alt="Mission" class="h-16 mb-4">
+            <img src="../assets/img/icons/missions.png" alt="Mission" class="h-16 mb-4">
             <h3 class="cinzel text-xl font-semibold mb-2">Notre mission</h3>
             <p class="text-sm text-gray-600">
                 Rechercher, documenter et transmettre le patrimoine archéologique, pour l'enrichissement de la mémoire collective.
@@ -38,7 +38,7 @@ session_start();
 
         <!-- Valeurs -->
         <div class="bg-white border rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-            <img src="../assets/img/icon-values.png" alt="Valeurs" class="h-16 mb-4">
+            <img src="../assets/img/icons/valeurs.png" alt="Valeurs" class="h-16 mb-4">
             <h3 class="cinzel text-xl font-semibold mb-2">Nos valeurs</h3>
             <p class="text-sm text-gray-600">
                 Intégrité, passion, collaboration, et respect des civilisations étudiées guident chacune de nos actions.
@@ -47,7 +47,7 @@ session_start();
 
         <!-- Engagement -->
         <div class="bg-white border rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-            <img src="../assets/img/icon-engagement.png" alt="Engagement" class="h-16 mb-4">
+            <img src="../assets/img/icons/engagements.png" alt="Engagement" class="h-16 mb-4">
             <h3 class="cinzel text-xl font-semibold mb-2">Notre engagement</h3>
             <p class="text-sm text-gray-600">
                 Protéger les sites archéologiques et sensibiliser le grand public à leur importance à travers des projets éducatifs.
