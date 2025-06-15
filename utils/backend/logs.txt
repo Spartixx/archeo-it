@@ -33,3 +33,26 @@
 2025-06-15 09:10:49   |   (login) : admin s'est connecté. Id : 4 Mail : admin@gmail.com Rôle : 1
 2025-06-15 09:11:30   |   (memberUpdate) : admin (id: 4) gère l'utilisateur id : 5
 2025-06-15 09:12:06   |   (memberUpdate) : admin (id: 4) gère l'utilisateur id : 5
+2025-06-15 13:13:49   |   (login) : admin s'est connecté. Id : 4 Mail : admin@gmail.com Rôle : 1
+2025-06-15 13:15:33   |   (logout) : admin s'est déconnecté. Id : 4 Mail : admin@gmail.com
+2025-06-15 13:16:04   |   (login) : admin s'est connecté. Id : 4 Mail : admin@gmail.com Rôle : 1
+2025-06-15 13:23:34   |   (register) : $Valou a crée un nouveau compte. Mail : val.macrez@gmail.com. 
+2025-06-15 13:25:35   |   (logout) : admin s'est déconnecté. Id : 4 Mail : admin@gmail.com
+2025-06-15 13:26:06   |   (login) : Valou s'est connecté. Id : 9 Mail : val.macrez@gmail.com Rôle : 0
+2025-06-15 13:26:15   |   (logout) : Valou s'est déconnecté. Id : 9 Mail : val.macrez@gmail.com
+2025-06-15 13:26:31   |   (login) : admin s'est connecté. Id : 4 Mail : admin@gmail.com Rôle : 1
+2025-06-15 13:27:01   |   (memberUpdate) : admin (id: 4) gère l'utilisateur id : 9
+2025-06-15 13:27:28   |   (memberUpdate) : admin (id: 4) a modifié le mot de passe de l'utilisateur id : 9
+2025-06-15 13:28:17   |   (memberUpdate) : admin (id: 4) gère l'utilisateur id : 9
+2025-06-15 13:28:24   |   (memberUpdate) : admin (id: 4) a modifié le rôle de l'utilisateur id : 9 pour admin
+2025-06-15 13:28:27   |   (logout) : admin s'est déconnecté. Id : 4 Mail : admin@gmail.com
+2025-06-15 13:28:56   |   (login) : Valou s'est connecté. Id : 9 Mail : val.macrez@gmail.com Rôle : 1
+2025-06-15 13:29:14   |   (articleUpdate) : Valou (id: 9) crée le blog d'id : 106
+2025-06-15 13:29:23   |   (articleUpdate) : Valou (id: 9) modifie le titre du blog d'id : 106
+2025-06-15 13:29:34   |   (articleUpdate) : Valou (id: 9) rénitialise le titre du blog d'id : 106
+2025-06-15 13:29:37   |   (articleUpdate) : Valou (id: 9) modifie le titre du blog d'id : 106
+2025-06-15 13:29:41   |   (articleUpdate) : Valou (id: 9) modifie la description du blog d'id : 106
+2025-06-15 13:29:42   |   (articleUpdate) : Valou (id: 9) rénitialise la description du blog d'id : 106
+2025-06-15 13:29:44   |   (articleUpdate) : Valou (id: 9) rénitialise le titre du blog d'id : 106
+2025-06-15 13:29:47   |   (articleUpdate) : Valou (id: 9) modifie le titre du blog d'id : 106
+2025-06-15 13:29:50   |   (articleUpdate) : Valou (id: 9) modifie la description du blog d'id : 106
