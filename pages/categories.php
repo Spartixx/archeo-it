@@ -46,18 +46,15 @@ include("../utils/database/blog.php");
                 ?>
                 <div class="h-full">
                     <div class="max-w-sm rounded-xl overflow-hidden shadow-lg bg-white h-full">
-                        <img class="w-full" src="<?= isset($blogDatas["image"]) ? "../assets/img/userUploads/".$blogDatas["image"] : "../assets/img/archeoBodyBackground.jpg" ?>" alt="Sunset in the mountains">
+                        <img class="w-full h-60" src="<?= isset($blogDatas["image"]) ? "../assets/img/userUploads/".$blogDatas["image"] : "../assets/img/archeoBodyBackground.jpg" ?>" alt="Sunset in the mountains">
                         <div class="px-6 py-4">
                             <div class="font-bold text-xl mb-2"><?= $blogDatas["title"] ?></div>
                             <p class="text-gray-700 text-base h-20">
                                 <?= isset($blogDatas["description"]) ? $blogDatas["description"] : "Aucune description pour ce $articleTypeName." ?>
                             </p>
+                            <p class="text-gray-500 mt-2"><?= $blogDatas["creation_date"] ?></p>
                         </div>
-                        <div class="px-6 pt-4 pb-2">
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-                        </div>
+
                     </div>
                 </div>
 

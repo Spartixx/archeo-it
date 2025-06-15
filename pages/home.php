@@ -114,9 +114,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <?php }else{?>
                             <div class="hidden duration-700 ease-in-out bg-yellow-950/40" data-carousel-item>
-                                <div class="flex items-center justify-center h-full w-full">
-                                    <div class="flex flex-col gap-3 h-fit w-fit justify-center items-center relative z-49 bg-black/60 rounded-xl p-2">
-                                        <a href="login.php" class="text-4xl font-bold text-white relative z-50 text-center">Inscrivez vous pour voir plus de <?= $mode ?>.</a>
+                                <div class="flex items-start mt-5 justify-center h-full w-full">
+                                    <div class="flex flex-col gap-10 h-fit w-fit justify-center items-center relative z-49 rounded-xl p-2">
+                                        <a href="login.php" class="text-xl md:text-4xl bg-black/60 p-2 rounded-xl font-bold text-white relative z-50 text-center">Inscrivez vous pour voir plus de <?= $mode ?>.</a>
+                                        <a href="login.php" class="text-xl md:text-4xl bg-black/60 p-2 rounded-xl  font-bold text-white relative z-50 text-center">Clique-moi !</a>
                                     </div>
                                 </div>
                             </div>

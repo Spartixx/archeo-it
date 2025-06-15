@@ -18,29 +18,6 @@
             </div>
 
             <div class="flex flex-row gap-4 w-fit">
-                <?php if(isset($_SESSION["user"]["admin"]) && $_SESSION["user"]["admin"] == 1) { ?>
-                    <a class="flex items-center pr-[1rem] p-2 bg-white rounded-xl hover:bg-yellow-950 transition hover:scale-105 text-black hover:text-white" href="../pages/blogCreation.php?type=0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-4 w-4">
-                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                            <polyline points="10 17 15 12 10 7"></polyline>
-                            <line x1="15" x2="3" y1="12" y2="12"></line>
-                        </svg>
-
-                        <h2 class="md:text-xl sm:text-lg text-lg">Créer un blog</h2>
-                    </a>
-                <?php }?>
-
-                <?php if(isset($_SESSION["user"]["admin"]) && $_SESSION["user"]["admin"] == 1) { ?>
-                    <a class="flex items-center pr-[1rem] p-2 bg-white rounded-xl hover:bg-yellow-950 transition hover:scale-105 text-black hover:text-white" href="../pages/blogCreation.php?type=1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-4 w-4">
-                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                            <polyline points="10 17 15 12 10 7"></polyline>
-                            <line x1="15" x2="3" y1="12" y2="12"></line>
-                        </svg>
-
-                        <h2 class="md:text-xl sm:text-lg text-lg">Créer un chantier</h2>
-                    </a>
-                <?php }?>
 
                 <a class="flex items-center pr-[1rem] p-2 bg-white rounded-xl hover:bg-yellow-950 transition hover:scale-105 text-black hover:text-white" href="../pages/<?= isset($_SESSION["user"]["id"]) ? "dashboard.php" : "login.php" ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-4 w-4">

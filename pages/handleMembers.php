@@ -8,6 +8,7 @@ session_start();
 
 include("../utils/database/connection.php");
 include("../utils/database/user.php");
+include("../utils/backend/log.php");
 
 $startLimit = 6;
 $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
@@ -16,13 +17,16 @@ $totalUsers = getTotalUser()["totalUser"];
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     if(isset($_POST["editNameBtn"]) && isset($_POST["newNameInput"])){
         updateName((int)$_POST["editNameBtn"], $_POST["newNameInput"]);
+        write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") a modifié le nom de l'utilisateur id : ".(int)$_POST["editNameBtn"]." pour ".$_POST["newNameInput"],"memberUpdate");
     }
 
     if(isset($_POST["editRoleBtn"]) && isset($_POST["newRoleInput"])){
         if($_POST["newRoleInput"] == "admin"){
             updateRole($_POST["editRoleBtn"], 1);
+            write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") a modifié le rôle de l'utilisateur id : ".(int)$_POST["editRoleBtn"]." pour ".$_POST["newRoleInput"],"memberUpdate");
         }else if($_POST["newRoleInput"] == "member"){
             updateRole($_POST["editRoleBtn"], 0);
+            write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") a modifié le rôle de l'utilisateur id : ".(int)$_POST["editRoleBtn"]." pour ".$_POST["newRoleInput"],"memberUpdate");
         }else{
             alert("Veuillez entrez une valeur valide ! (member ou admin)", "warning");
         }
@@ -30,10 +34,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if(isset($_POST["editEmailBtn"]) && isset($_POST["newEmailInput"])){
         updateEmail($_POST["editEmailBtn"], $_POST["newEmailInput"]);
+        write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") a modifié le mail de l'utilisateur id : ".(int)$_POST["editEmailBtn"]." pour ".$_POST["newEmailInput"],"memberUpdate");
     }
 
     if(isset($_POST["editPasswordBtn"]) && isset($_POST["newPasswordInput"])){
         updatePassword($_POST["editPasswordBtn"], $_POST["newPasswordInput"]);
+        write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") a modifié le mot de passe de l'utilisateur id : ".(int)$_POST["editPasswordBtn"],"memberUpdate");
     }
 
     if(isset($_POST["showDown"])){
@@ -82,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-<div class="flex flex-row gap-10 mt-10 justify-center h-fit">
+<div class="flex flex-row flex-wrap gap-10 mt-10 justify-center h-fit">
 
     <form method="post" class="flex flex-col gap-3 p-3 w-fit items-center">
         <h2 class="cinzel text-3xl font-bold">Vos utilisateurs</h2>
@@ -115,6 +121,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(isset($_POST["handleUserBtn"])){
             $currentUser = getUserDatas($_POST["handleUserBtn"])[0];
+            write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") gère l'utilisateur id : ".$currentUser["id"],"memberUpdate");
+
             ?>
             <form method="post" class="h-fit border-1 rounded-xl p-2 flex flex-col gap-3">
                 <h2 class="cinzel text-2xl font-bold p-2">Gestion de l'utilisateur</h2>

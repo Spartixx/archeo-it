@@ -21,3 +21,15 @@
 2025-06-15 08:21:28   |   (articleUpdate) : admin (id: 4) ajoute une image au blog d'id : 105 en position : 2
 2025-06-15 08:21:34   |   (articleUpdate) : admin (id: 4) monte l'élement en position 2 du blog d'id : 105
 2025-06-15 08:21:43   |   (articleUpdate) : admin (id: 4) supprime le blog d'id 105
+2025-06-15 08:29:11   |   (logout) : admin s'est déconnecté. Id : 4 Mail : admin@gmail.com
+2025-06-15 08:31:10   |   (login) : nicolas s'est connecté. Id : 5 Mail : nicolas@gmail.com Rôle : 1
+2025-06-15 08:31:17   |   (login) : admin s'est connecté. Id : 4 Mail : admin@gmail.com Rôle : 1
+2025-06-15 08:31:44   |   (logout) : admin s'est déconnecté. Id : 4 Mail : admin@gmail.com
+2025-06-15 08:40:10   |   (login) : admin s'est connecté. Id : 4 Mail : admin@gmail.com Rôle : 1
+2025-06-15 08:40:35   |   (logout) : admin s'est déconnecté. Id : 4 Mail : admin@gmail.com
+2025-06-15 09:01:24   |   (login) : admin s'est connecté. Id : 4 Mail : admin@gmail.com Rôle : 1
+2025-06-15 09:02:25   |   (login) : admin s'est connecté. Id : 4 Mail : admin@gmail.com Rôle : 1
+2025-06-15 09:09:37   |   (logout) : admin s'est déconnecté. Id : 4 Mail : admin@gmail.com
+2025-06-15 09:10:49   |   (login) : admin s'est connecté. Id : 4 Mail : admin@gmail.com Rôle : 1
+2025-06-15 09:11:30   |   (memberUpdate) : admin (id: 4) gère l'utilisateur id : 5
+2025-06-15 09:12:06   |   (memberUpdate) : admin (id: 4) gère l'utilisateur id : 5

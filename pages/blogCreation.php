@@ -7,21 +7,24 @@ session_start();
 
 include("../utils/database/connection.php");
 include("../utils/database/blog.php");
+include("../utils/backend/log.php");
 
 
 $blog_id = isset($_GET['blog_id']) ? $_GET['blog_id'] : 0;
 $articleType = isset($_GET['type']) ? $_GET['type'] : 0;
 $bypassPendings = isset($_GET['bypass']);
+$articleName = $articleType == 0 ? "blog" : "chantier";
 
 $blogDatas = getArticleDatas($blog_id);
 $blogPrimaryDatas = getCurrentBlog($blog_id);
 $totalElements = getMaxTextPosition((int)$blog_id)["total_elements"];
 
 if ($blog_id == 0 && isset($_SESSION["user"]["admin"]) && $_SESSION["user"]["admin"] == 1) {
-    $pendingBlog = getPendingBlog($_SESSION["user"]["id"], $articleType);
+    $pendingBlog = getPendingBlog($_SESSION["user"]["id"], htmlspecialchars($articleType));
 
     if ($bypassPendings || count($pendingBlog) == 0) {
-        $blogId = insertBlog($_SESSION["user"]["id"], $articleType);
+        $blogId = insertBlog($_SESSION["user"]["id"], htmlspecialchars($articleType));
+        write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") crée le blog d'id : $blogId","articleUpdate");
         header("Location: blogCreation.php?blog_id=".$blogId."&type=".$articleType);
         exit();
     }
@@ -31,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST["removeBlogBtn"])) {
         $blogToRemove = (int)$_POST["removeBlogBtn"];
         removeBlog($blogToRemove);
+        write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") supprime le $articleName d'id $blogToRemove", "articleUpdate");
         header("location: ./blogCreation.php?type=$articleType");
     }
 
@@ -40,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (strlen($content) < 100) {
                 alert("Veuillez entrer au moins 100 caractère pour créer un paragraphe !", "warning");
             } else {
-                insertText($content, (int)$blog_id, (int)$_POST["tempParagraph"], $articleType);
+                insertText(htmlspecialchars($content), htmlspecialchars((int)$blog_id), htmlspecialchars((int)$_POST["tempParagraph"]), htmlspecialchars($articleType));
+                write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") ajoute un paragraphe au $articleName d'id : $blog_id en position : ".$_POST["tempParagraph"], "articleUpdate");
                 header("Location: ./blogCreation.php?blog_id=" . $blog_id);
             }
 
@@ -50,7 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (strlen($content) < 20) {
                 alert("Veuillez entrer au moins 100 caractère pour créer un paragraphe !", "warning");
             } else {
-                insertText($content, (int)$blog_id, (int)$_POST["tempParagraph"], $articleType, 1);
+                insertText(htmlspecialchars($content), htmlspecialchars((int)$blog_id), htmlspecialchars((int)$_POST["tempParagraph"]), htmlspecialchars($articleType), 1);
+                write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") ajoute un sous-titre au $articleName d'id : $blog_id en position : ".$_POST["tempParagraph"], "articleUpdate");
                 header("Location: ./blogCreation.php?blog_id=" . $blog_id);
             }
 
@@ -58,7 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (isset($_FILES["imageTemp"])) {
             $imgName = count(scandir("../assets/img/userUploads"));
             move_uploaded_file($_FILES["imageTemp"]["tmp_name"], "../assets/img/userUploads/" . $imgName);
-            insertText($imgName, (int)$blog_id, (int)$_POST["tempParagraph"], $articleType, 2);
+            insertText(htmlspecialchars($imgName), htmlspecialchars((int)$blog_id), htmlspecialchars((int)$_POST["tempParagraph"]), htmlspecialchars($articleType), 2);
+            write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") ajoute une image au $articleName d'id : $blog_id en position : ".$_POST["tempParagraph"], "articleUpdate");
         }
 
     }
@@ -69,7 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (strlen($title) < 4) {
             alert("Veuillez entrer au moins 4 caractère pour créer un paragraphe !", "warning");
         } else {
-            updateTitle($title, (int)$blog_id);
+            updateTitle(htmlspecialchars($title), (int)$blog_id);
+            write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") modifie le titre du $articleName d'id : $blog_id", "articleUpdate");
             header("Location: ./blogCreation.php?blog_id=" . $blog_id);
         }
     }
@@ -80,7 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (strlen($title) > 255) {
             alert("Veuillez entrer 255 caractères maximum pour créer une description !", "warning");
         } else {
-            updateDescription($title, (int)$blog_id);
+            updateDescription(htmlspecialchars($title), (int)$blog_id);
+            write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") modifie la description du $articleName d'id : $blog_id", "articleUpdate");
+
             header("Location: ./blogCreation.php?blog_id=" . $blog_id);
         }
     }
@@ -90,7 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (isset($_FILES["tempImage"])) {
             $imgName = count(scandir("../assets/img/userUploads"));
             move_uploaded_file($_FILES["tempImage"]["tmp_name"], "../assets/img/userUploads/" . $imgName);
-            updateImage($imgName, (int)$blog_id);
+            updateImage(htmlspecialchars($imgName), (int)$blog_id);
+            write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") modifie l'image du $articleName d'id : $blog_id", "articleUpdate");
             header("Location: ./blogCreation.php?blog_id=" . $blog_id);
         }
 
@@ -101,6 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $elementPosition = $_POST["textDownBtn"];
         $statusCode = moveElement($elementPosition, (int)$blog_id, $direction = "down", $articleType);
         if ($statusCode) {
+            write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") descend l'élement en position $elementPosition du $articleName d'id : $blog_id", "articleUpdate");
             header("Location: ./blogCreation.php?blog_id=" . $blog_id);
         }
     }
@@ -109,6 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $elementPosition = $_POST["textUpBtn"];
         $statusCode = moveElement($elementPosition, (int)$blog_id, $direction = "up", $articleType);
         if ($statusCode) {
+            write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") monte l'élement en position $elementPosition du $articleName d'id : $blog_id", "articleUpdate");
             header("Location: ./blogCreation.php?blog_id=" . $blog_id);
         }
     }
@@ -116,22 +129,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST["deleteTextBtn"])) {
         $textId = $_POST["deleteTextBtn"];
         removeText($textId);
+        write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") retire l'élement d'id : $textId du $articleName d'id : $blog_id", "articleUpdate");
         header("Location: ./blogCreation.php?blog_id=" . $blog_id);
     }
 
     if (isset($_POST["editTitle"])) {
         updateTitle(null, (int)$blog_id);
+        write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") rénitialise le titre du $articleName d'id : $blog_id", "articleUpdate");
         header("Location: ./blogCreation.php?blog_id=" . $blog_id);
     }
 
     if (isset($_POST["editDescription"])) {
         updateDescription(null, (int)$blog_id);
+        write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") rénitialise la description du $articleName d'id : $blog_id", "articleUpdate");
         header("Location: ./blogCreation.php?blog_id=" . $blog_id);
     }
 
     if (isset($_POST["editImage"])) {
         updateImage(null, (int)$blog_id);
-        unlink("../assets/img/userUploads/" . $imgName);
+        write_log($_SESSION["user"]["username"]." (id: ".$_SESSION["user"]["id"].") rénitialise l'image du $articleName d'id : $blog_id", "articleUpdate");
+        unlink("../assets/img/userUploads/" .$_POST["editImage"]);
         header("Location: ./blogCreation.php?blog_id=" . $blog_id);
     }
 }

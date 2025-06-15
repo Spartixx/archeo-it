@@ -3,6 +3,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+include_once("../utils/backend/log.php");
+
 
 session_start();
 
@@ -15,6 +17,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $mode = "admin";
     }else if(isset($_POST["logoutBtn"])){
         session_destroy();
+        write_log($_SESSION["user"]["username"]." s'est déconnecté. Id : ".$_SESSION["user"]["id"]." Mail : ".$_SESSION["user"]["email"], "logout");
         header("location: ./home.php");
     }
 }
@@ -146,8 +149,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     </div>
 
                     <div class="flex flex-col gap-3 items-center">
-                        <a class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Liste complète</a>
-                        <a class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Créer un blog</a>
+                        <a href="../pages/categories.php?type=0" class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Liste complète</a>
+                        <a href="../pages/blogCreation.php?type=0" class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Créer un blog</a>
                     </div>
                 </div>
 
@@ -177,8 +180,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     </div>
 
                     <div class="flex flex-col gap-3 items-center">
-                        <a class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Liste complète</a>
-                        <a class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Créer un chantier</a>
+                        <a href="../pages/categories.php?type=1" class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Liste complète</a>
+                        <a href="../pages/blogCreation.php?type=1" class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Créer un chantier</a>
                     </div>
                 </div>
 
