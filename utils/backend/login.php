@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once '/var/www/archeo-it/utils/database/connection.php';
 include_once '/var/www/archeo-it/utils/database/user.php';
-
+include_once '/var/www/archeo-it/utils/backend/log.php';
 function checkLogin($email, $password){
     /**
      * Allows to get the user password by its email.
@@ -24,9 +24,10 @@ function checkLogin($email, $password){
         alert("Le mot de passe est incorrect !", "danger");
         return 0;
     }
-
     alert("Connexion effectuée avec succes !", "success");
-    $_SESSION['user'] = getUserDatas(htmlspecialchars($email))[0];
+    $userDatas = getUserDatas(htmlspecialchars($email))[0];
+    $_SESSION['user'] = $userDatas;
+    write_log($userDatas["username"]." s'est connecté. Id : ".$userDatas["id"]." Mail : ".$userDatas["email"]." Rôle : ".$userDatas["admin"], "login");
     return 1;
 }
 
@@ -63,6 +64,7 @@ function registerUser($username, $email, $password, $passwordConfirm){
     }
 
     insertUser(htmlspecialchars($email), password_hash($password, PASSWORD_DEFAULT), htmlspecialchars($username));
+    write_log("$$username a crée un nouveau compte. Mail : $email. ", "register");
     return 1;
 
 }

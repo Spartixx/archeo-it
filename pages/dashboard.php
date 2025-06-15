@@ -3,6 +3,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+include_once("../utils/backend/log.php");
+
 
 session_start();
 
@@ -15,6 +17,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $mode = "admin";
     }else if(isset($_POST["logoutBtn"])){
         session_destroy();
+        write_log($_SESSION["user"]["username"]." s'est déconnecté. Id : ".$_SESSION["user"]["id"]." Mail : ".$_SESSION["user"]["email"], "logout");
         header("location: ./home.php");
     }
 }
@@ -119,7 +122,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             <a href="./handleMembers.php" class="p-2 px-8 text-2xl bg-yellow-950 text-white rounded-xl transition hover:bg-yellow-950/90 hover:scale-103">Gérer les membres</a>
 
-            <div class="flex flex-row flex-wrap justify-center w-full gap-5 p-3">
+                <div class="flex flex-row flex-wrap justify-center w-full gap-5 p-3">
 
                 <div class="flex flex-col gap-6 justify-start p-3 rounded-xl bg-yellow-950/60 sm:w-full md:w-full lg:w-[48%] w-full h-fit">
 
@@ -146,8 +149,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     </div>
 
                     <div class="flex flex-col gap-3 items-center">
-                        <a class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Liste complète</a>
-                        <a class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Créer un blog</a>
+                        <a href="../pages/categories.php?type=0" class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Liste complète</a>
+                        <a href="../pages/blogCreation.php?type=0" class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Créer un blog</a>
                     </div>
                 </div>
 
@@ -177,8 +180,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     </div>
 
                     <div class="flex flex-col gap-3 items-center">
-                        <a class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Liste complète</a>
-                        <a class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Créer un chantier</a>
+                        <a href="../pages/categories.php?type=1" class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Liste complète</a>
+                        <a href="../pages/blogCreation.php?type=1" class="text-white text-2xl p-2 px-8 bg-yellow-950/80 rounded-lg w-fit transition hover:bg-yellow-950 hover:scale-103">Créer un chantier</a>
                     </div>
                 </div>
 

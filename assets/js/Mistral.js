@@ -42,3 +42,5 @@ app.post('/chat', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Serveur backend Mistral démarré sur http://localhost:${PORT}`);
 });
+
+

@@ -145,7 +145,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
 </div>
 
 </body>
-<script type="module" src="../assets/js/test.js"></script>
+<script type="module" src="../assets/js/passwordGenerationApi.js"></script>
 <script type="module" src="../assets/js/modals.js"></script>
 <script type="module" src="../assets/js/passwordView.js"></script>
 </html>
