@@ -1,24 +1,9 @@
 <?php
-$host = 'localhost';
-$db   = 'archeo';
-$user = 'root';
-$pass = 'root';
-$charset = 'utf8mb4';
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-];
-
-try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-    die('Erreur de connexion : ' . $e->getMessage());
-}
+include("../utils/database/connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    global $pdo;
     $nom = htmlspecialchars(trim($_POST["nom"]));
     $email = htmlspecialchars(trim($_POST["email"]));
     $sujet = htmlspecialchars(trim($_POST["sujet"]));

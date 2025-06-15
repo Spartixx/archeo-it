@@ -119,7 +119,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             <a href="./handleMembers.php" class="p-2 px-8 text-2xl bg-yellow-950 text-white rounded-xl transition hover:bg-yellow-950/90 hover:scale-103">Gérer les membres</a>
 
-            <div class="flex flex-row flex-wrap justify-center w-full gap-5 p-3">
+                <div class="flex flex-row flex-wrap justify-center w-full gap-5 p-3">
 
                 <div class="flex flex-col gap-6 justify-start p-3 rounded-xl bg-yellow-950/60 sm:w-full md:w-full lg:w-[48%] w-full h-fit">
 
