@@ -2,7 +2,7 @@
 <html lang="fr" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Chantier</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="../assets/js/alert.js"></script>
     <link rel="stylesheet" href="../assets/css/main.css">
@@ -64,7 +64,7 @@
 </div>
 
 
-
+    <?php include("../components/footer.php"); ?>
 </body>
 </html>
 
@@ -78,5 +78,4 @@ session_start();
 
 
 
-</body>
 </html>

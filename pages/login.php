@@ -1,3 +1,30 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include '../components/alert.php';
+include '../utils/backend/login.php';
+
+session_start();
+
+if(isset($_SESSION["user"]) && $_SESSION["user"] != []){
+    header("location: ./home.php");
+}
+
+if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
+    if(isset($_POST["sendLoginBtn"])){
+        checkLoginInputs($_POST);
+
+
+    }else if(isset($_POST["sendRegisterBtn"])) {
+        checkRegisterInputs($_POST);
+
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,16 +42,9 @@
 
 <body class="w-full h-screen max-h-screen bg-white">
 
-<?php include '../components/alert.php'; ?>
 
-<?php
-
-    session_start();
-
-?>
-
-   <div class="w-full flex flex-row flex-wrap gap-15 justify-center items-center p-8 mt-3" >
-       <div class="w-auto h-fit border-2 rounded-2xl flex flex-col justify-center items-center gap-4 p-4 transition hover:sm:scale-105 transition lg:hover:scale-110 transition hover:scale-105">
+   <div class="w-full flex flex-row flex-wrap gap-15 justify-center items-start p-8 mt-3">
+       <form class="w-auto h-fit border-2 rounded-2xl flex flex-col justify-center items-center gap-4 p-4" method="post">
 
            <img class="w-25 h-25 rounded-2xl" src="../assets/img/logo-archeo-it.png" alt="logo">
 
@@ -32,19 +52,19 @@
 
            <div class="flex flex-col items-start w-full">
                <h3 class="font-bold text-2xl rounded-2xl text-yellow-950" >Email</h3>
-               <input class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre addresse E-mail" id="modeInput">
+               <input name="loginMailInput" class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre addresse E-mail" id="loginMailInput">
            </div>
 
            <div class="flex flex-col items-start w-full">
                <h3 class="font-bold text-2xl rounded-2xl text-yellow-950" >Mot de passe</h3>
-               <input class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre mot de passe" id="sizeInput">
+               <input name="loginPasswordInput" class="border-2 rounded-2xl p-3 w-full" type="password" placeholder="Votre mot de passe" id="loginPasswordInput">
            </div>
 
-           <button class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-white transition hover:scale-105" id="loginBtn" >Envoyer</button>
+           <button name="sendLoginBtn" class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-white transition hover:scale-105" id="sendLoginBtn" type="submit">Envoyer</button>
 
-       </div>
+       </form>
 
-       <div class="w-auto h-fit border-2 rounded-2xl flex flex-col justify-center items-center gap-4 p-4 transition hover:sm:scale-105 transition lg:hover:scale-110 transition hover:scale-105">
+       <form class="w-auto h-fit border-2 rounded-2xl flex flex-col justify-center items-center gap-4 p-4" method="post">
 
            <img class="w-25 h-25 rounded-2xl" src="../assets/img/logo-archeo-it.png" alt="logo">
 
@@ -52,18 +72,18 @@
 
            <div class="flex flex-col items-start w-full">
                <h3 class="font-bold text-2xl rounded-2xl text-yellow-950" >Nom d'utilisateur</h3>
-               <input class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre nom d'utilisateur">
+               <input name="RegisterUsernameInput" class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre nom d'utilisateur" id="registerNameInput">
            </div>
 
            <div class="flex flex-col items-start w-full">
                <h3 class="font-bold text-2xl rounded-2xl text-yellow-950" >Email</h3>
-               <input class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre addresse E-mail">
+               <input name="registerMailInput" class="border-2 rounded-2xl p-3 w-full" type="text" placeholder="Votre addresse E-mail" id="registerMailInput">
            </div>
 
            <div class="flex flex-col items-start w-full">
                <h3 class="font-bold text-2xl rounded-2xl text-yellow-950" >Mot de passe</h3>
                <div class="flex flex-row items-center justify-end w-full">
-                   <input class="border-2 rounded-2xl p-3 w-full" id="passwordInput" type="password" placeholder="Votre mot de passe">
+                   <input name="passwordRegisterInput" class="border-2 rounded-2xl p-3 w-full" id="passwordRegisterInput" type="password" placeholder="Votre mot de passe">
                    <img id="passwordView" class="w-10 h-10 absolute mr-1" src="../assets/img/icons/hidePassword.webp" alt="passwordHided">
                </div>
            </div>
@@ -71,18 +91,18 @@
            <div class="flex flex-col items-start w-full">
                <h3 class="font-bold text-2xl rounded-2xl text-yellow-950" >Confirmation</h3>
                <div class="flex flex-row items-center justify-end w-full">
-                   <input id="passwordConfirmInput" class="border-2 rounded-2xl p-3 w-full" type="password" placeholder="Confirmez votre mot de passe">
+                   <input name="passwordConfirmInput" id="passwordConfirmInput" class="border-2 rounded-2xl p-3 w-full" type="password" placeholder="Confirmez votre mot de passe">
                    <img id="passwordConfirmView" class="w-10 h-10 absolute mr-1" src="../assets/img/icons/hidePassword.webp" alt="passwordHided">
                </div>
 
-               <button class="underline ml-1 mt-1 transition hover:scale-105" id="generatePasswordBtn">Générer un mot de passe</button>
+               <button type="button" name="generatePasswordBtn" class="underline ml-1 mt-1 transition hover:scale-105" id="generatePasswordBtn">Générer un mot de passe</button>
 
 
            </div>
 
-           <button class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-white transition hover:scale-105" >Envoyer</button>
+           <button name="sendRegisterBtn" class="mt-5 rounded-2xl p-3 w-full bg-yellow-950 text-white transition hover:scale-105" id="sendRegisterBtn" type="submit">Envoyer</button>
 
-       </div>
+       </form>
    </div>
 
 
@@ -91,7 +111,7 @@
 <div class=" fixed inset-0 z-10 w-screen passwordGenerationDiv" hidden>
     <div class="flex flex-row min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0 ">
         <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg bg-white">
-            <div class="px-4 pt-5 sm:p-6 sm:pb-4 relative z-10 bg-yellow-950/10">
+            <div class="px-4 pt-5 sm:p-6 sm:pb-4 relative z-10 bg-white">
                 <div class="sm:flex sm:items-start">
                     <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                         <h3 class=" text-2xl font-semibold text-black font-bold" id="modal-title">Choisissez vos paramètres</h3>
@@ -101,7 +121,7 @@
                         </div>
 
                         <div class="mt-2 flex flex-col items-start">
-                            <p class="text-l text-black font-semibold" >Taille de mot de passe</p>
+                            <p class="text-l text-black font-semibold" >Sécurité du mot de passe</p>
                             <select class="text-black border-1 border-black rounded-sm p-1" name="passwordModeSelection" id="passwordModeSelection">
                                 <option value="1">Alphabétique seulement</option>
                                 <option value="2">Alphabétique et numérique</option>
@@ -125,7 +145,7 @@
 </div>
 
 </body>
-<script type="module" src="../assets/js/test.js"></script>
+<script type="module" src="../assets/js/passwordGenerationApi.js"></script>
 <script type="module" src="../assets/js/modals.js"></script>
 <script type="module" src="../assets/js/passwordView.js"></script>
 </html>

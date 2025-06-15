@@ -17,7 +17,24 @@
 
 
 .cinzel {
-             font-family: "Cinzel", serif;
-             font-optical-sizing: auto;
-             font-style: normal;
-         }
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.shake {
+    animation: shake 2s ease-in-out infinite;
+}
