@@ -49,8 +49,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <circle cx="11" cy="11" r="8"></circle>
                     <path d="m21 21-4.3-4.3"></path>
                 </svg>
+                <a href="about.php">
                 Commencer l'Exploration
+                </a>
             </button>
+
         </div>
     </div>
 
