@@ -27,7 +27,7 @@ function checkLogin($email, $password){
     alert("Connexion effectuée avec succes !", "success");
     $userDatas = getUserDatas(htmlspecialchars($email))[0];
     $_SESSION['user'] = $userDatas;
-    write_log($userDatas["username"]." s'est connecté. Id : ".$userDatas["id"]." Mail : ".$userDatas["email"], "connexion");
+    write_log($userDatas["username"]." s'est connecté. Id : ".$userDatas["id"]." Mail : ".$userDatas["email"]." Rôle : ".$userDatas["admin"], "login");
     return 1;
 }
 
@@ -64,7 +64,7 @@ function registerUser($username, $email, $password, $passwordConfirm){
     }
 
     insertUser(htmlspecialchars($email), password_hash($password, PASSWORD_DEFAULT), htmlspecialchars($username));
-    write_log("$$username a crée un nouveau compte. Mail : $email. ", "inscription");
+    write_log("$$username a crée un nouveau compte. Mail : $email. ", "register");
     return 1;
 
 }

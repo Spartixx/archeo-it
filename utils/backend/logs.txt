@@ -1,4 +1,23 @@
-2025-06-15 07:48:51   |   (inscription) : test
-2025-06-15 07:50:22   |   (inscription) : test
-2025-06-15 07:50:23   |   (inscription) : test
-2025-06-15 07:50:23   |   (déconnexion) : admin s'est déconnecté. Id : 4 Mail : admin@gmail.com
+2025-06-15 07:50:23   |   (logout) : admin s'est déconnecté. Id : 4 Mail : admin@gmail.com
+2025-06-15 07:54:41   |   (login) : admin s'est connecté. Id : 4 Mail : admin@gmail.com
+2025-06-15 08:01:09   |   (memberUpdate) : admin (4) a modifié le nom de l'utilisateur id : 7 pour test
+2025-06-15 08:18:49   |   (memberUpdate) : admin (id: 4) gère l'utilisateur id : 7
+2025-06-15 08:18:53   |   (memberUpdate) : admin (id: 4) a modifié le nom de l'utilisateur id : 7 pour killian
+2025-06-15 08:19:01   |   (memberUpdate) : admin (id: 4) gère l'utilisateur id : 7
+2025-06-15 08:19:08   |   (memberUpdate) : admin (id: 4) a modifié le rôle de l'utilisateur id : 7 pour admin
+2025-06-15 08:19:15   |   (memberUpdate) : admin (id: 4) gère l'utilisateur id : 7
+2025-06-15 08:19:20   |   (memberUpdate) : admin (id: 4) a modifié le rôle de l'utilisateur id : 7 pour member
+2025-06-15 08:19:58   |   (articleUpdate) : admin (id: 4) crée le blog d'id : 105
+2025-06-15 08:20:07   |   (articleUpdate) : admin (id: 4) modifie le titre du chantier d'id : 105
+2025-06-15 08:20:11   |   (articleUpdate) : admin (id: 4) rénitialise le titre du blog d'id : 105
+2025-06-15 08:20:15   |   (articleUpdate) : admin (id: 4) modifie le titre du blog d'id : 105
+2025-06-15 08:20:17   |   (articleUpdate) : admin (id: 4) modifie la description du blog d'id : 105
+2025-06-15 08:20:19   |   (articleUpdate) : admin (id: 4) rénitialise la description du blog d'id : 105
+2025-06-15 08:20:36   |   (articleUpdate) : admin (id: 4) modifie l'image du blog d'id : 105
+2025-06-15 08:20:38   |   (articleUpdate) : admin (id: 4) rénitialise l'image du blog d'id : 105
+2025-06-15 08:20:51   |   (articleUpdate) : admin (id: 4) ajoute une image au blog d'id : 105 en position : 1
+2025-06-15 08:20:58   |   (articleUpdate) : admin (id: 4) retire l'élement d'id : 58 du blog d'id : 105
+2025-06-15 08:21:09   |   (articleUpdate) : admin (id: 4) ajoute un sous-titre au blog d'id : 105 en position : 1
+2025-06-15 08:21:28   |   (articleUpdate) : admin (id: 4) ajoute une image au blog d'id : 105 en position : 2
+2025-06-15 08:21:34   |   (articleUpdate) : admin (id: 4) monte l'élement en position 2 du blog d'id : 105
+2025-06-15 08:21:43   |   (articleUpdate) : admin (id: 4) supprime le blog d'id 105
